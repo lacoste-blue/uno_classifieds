@@ -112,3 +112,11 @@ If this isn't working run `docker-machine env` to get the ip of the host machine
 Done!
 
 ## Running Tests
+
+We use RSpec for our unit tests. Running your test couldn't be simplier!
+
+### Running with Ruby:
+
+```bash
+bundle exec rspec
+```
