@@ -9,6 +9,7 @@ pipeline {
     stage('Testing') {
       steps {
         sh 'ruby --version'
+        echo 'HI!'
       }
     }
   }
