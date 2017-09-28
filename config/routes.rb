@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sub_categories
+  resources :categories
   devise_for :users, :controllers => { registrations: 'registrations' }
   get 'home/index'
 
