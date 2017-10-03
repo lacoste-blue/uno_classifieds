@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :category %>
-    <%= f.text_field :category %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, :prompt => true)  %>
   </div>
 
   <div class="field">

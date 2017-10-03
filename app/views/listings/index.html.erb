@@ -13,7 +13,7 @@
       <th>Location</th>
       <th>Description</th>
       <th>Price</th>
-      <th colspan="3"></th>
+      <th colspan="10"></th>
     </tr>
   </thead>
 
@@ -21,7 +21,7 @@
     <% @listings.each do |listing| %>
       <tr>
         <td><%= listing.title %></td>
-        <td><%= listing.category %></td>
+        <td><%= listing.category.name %></td>
         <td><%= listing.owner %></td>
         <td><%= listing.images %></td>
         <td><%= listing.tags %></td>
