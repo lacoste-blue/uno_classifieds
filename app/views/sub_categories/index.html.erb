@@ -17,11 +17,7 @@
       <tr>
         <td><%= sub_category.name %></td>
         <td><%= sub_category.description %></td>
-<<<<<<< HEAD
-        <td><%= sub_category.category %></td>
-=======
         <td><%= sub_category.category.name %></td>
->>>>>>> f9d352b625b34b48f63384cecb3f797c82fdec2e
         <td><%= link_to 'Show', sub_category %></td>
         <td><%= link_to 'Edit', edit_sub_category_path(sub_category) %></td>
         <td><%= link_to 'Destroy', sub_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>

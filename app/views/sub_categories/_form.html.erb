@@ -23,11 +23,7 @@
 
   <div class="field">
     <%= f.label :category_id %>
-<<<<<<< HEAD
-    <%= f.text_field :category_id %>
-=======
     <%= f.collection_select(:category_id, Category.all, :id, :name, :prompt => true)  %>
->>>>>>> f9d352b625b34b48f63384cecb3f797c82fdec2e
   </div>
 
   <div class="actions">
