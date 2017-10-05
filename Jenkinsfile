@@ -5,7 +5,7 @@ pipeline {
       steps {
         parallel(
           "Verify Lint": {
-            sh 'ruby --version'
+            sh 'echo "Hello world"'
             echo 'HI!'
             
           },
