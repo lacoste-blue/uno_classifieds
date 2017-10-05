@@ -13,7 +13,11 @@
       <th>Location</th>
       <th>Description</th>
       <th>Price</th>
+<<<<<<< HEAD
       <th colspan="3"></th>
+=======
+      <th colspan="10"></th>
+>>>>>>> f9d352b625b34b48f63384cecb3f797c82fdec2e
     </tr>
   </thead>
 
@@ -21,7 +25,11 @@
     <% @listings.each do |listing| %>
       <tr>
         <td><%= listing.title %></td>
+<<<<<<< HEAD
         <td><%= listing.category %></td>
+=======
+        <td><%= listing.category.name %></td>
+>>>>>>> f9d352b625b34b48f63384cecb3f797c82fdec2e
         <td><%= listing.owner %></td>
         <td><%= listing.images %></td>
         <td><%= listing.tags %></td>
