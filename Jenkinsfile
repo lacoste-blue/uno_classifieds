@@ -6,7 +6,7 @@ pipeline {
         parallel(
           "Verify Lint": {
             sh 'echo "Hello world"'
-            echo 'HI!'
+            echo 'Hello World'
             
           },
           "Verify Unit": {
