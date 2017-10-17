@@ -53,13 +53,9 @@
 
       <h1 class="my-4">Categories</h1>
       <div class="list-group">
-        <a href="#" class="list-group-item">Cars</a>
-        <a href="#" class="list-group-item">Computers</a>
-        <a href="#" class="list-group-item">Cell Phones</a>
-        <a href="#" class="list-group-item">Electronics</a>
-        <a href="#" class="list-group-item">Auto Parts</a>
-
-
+        <% @categories.each do |category| %>
+            <a href="#" class="list-group-item"><%= category.name %></a>
+        <% end %>
       </div>
 
     </div>
