@@ -40,7 +40,7 @@ pipeline {
             
           },
           "Build Publish": {
-            echo 'Hi'
+            echo 'sdfg'
             
           }
         )
