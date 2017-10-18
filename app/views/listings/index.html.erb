@@ -23,7 +23,8 @@
         <td><%= listing.title %></td>
         <td><%= listing.category.name %></td>
         <td><%= listing.owner %></td>
-        <td><%= listing.images %></td>
+        <td><%= link_to image_tag(listing.image.url, class: 'media-object'),
+        listing.image.url, target: '_blank'  %></td>
         <td><%= listing.tags %></td>
         <td><%= listing.location %></td>
         <td><%= listing.description %></td>

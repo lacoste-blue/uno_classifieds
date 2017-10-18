@@ -17,7 +17,7 @@
 
 <p>
   <strong>Images:</strong>
-  <%= @listing.images %>
+  <%= link_to image_tag(@listing.image.url(:med)), @listing.image.url %>
 </p>
 
 <p>
