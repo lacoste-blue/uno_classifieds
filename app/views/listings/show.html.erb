@@ -15,10 +15,28 @@
   <%= @listing.owner %>
 </p>
 
-<p>
-  <strong>Images:</strong>
-  <%= link_to image_tag(@listing.image.url(:med)), @listing.image.url %>
-</p>
+<h2>Pictures</h2>
+</div>
+
+<div class="row">
+  <ul class="thumbnails files">
+    <% unless @pictures.empty? %>
+        <% @pictures.each do |pic| %>
+            <li class="span3" id="picture_<%= pic.id %>">
+              <div class="thumbnail">
+                <%= image_tag pic.image.url %>
+                <div class="caption">
+                  <p style="text-align: center;">
+                    <%= link_to "Edit picture", image_path(pic) %>
+
+                  </p>
+                </div>
+              </div>
+            </li>
+        <% end %>
+    <% end %>
+  </ul>
+</div>
 
 <p>
   <strong>Tags:</strong>
