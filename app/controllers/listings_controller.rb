@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :action_name]
+
 
   # GET /listings
   # GET /listings.json
@@ -31,15 +32,13 @@ class ListingsController < ApplicationController
       if @listing.save
 
         if params[:images]
-          params[:images].each {|image|
-            @listing.pictures.create(image: image)
-          }
+          create_images
         end
-        format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
-        format.json { render :show, status: :created, location: @listing }
+        format.html {redirect_to @listing, notice: 'Listing was successfully created.'}
+        format.json {render :show, status: :created, location: @listing}
       else
-        format.html { render :new }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        format.html {render :new}
+        format.json {render json: @listing.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -49,11 +48,14 @@ class ListingsController < ApplicationController
   def update
     respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
-        format.json { render :show, status: :ok, location: @listing }
+        if params[:images]
+          create_images
+        end
+        format.html {redirect_to @listing, notice: 'Listing was successfully updated.'}
+        format.json {render :show, status: :ok, location: @listing}
       else
-        format.html { render :edit }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        format.html {render :edit}
+        format.json {render json: @listing.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -63,20 +65,26 @@ class ListingsController < ApplicationController
   def destroy
     @listing.destroy
     respond_to do |format|
-      format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html {redirect_to listings_url, notice: 'Listing was successfully destroyed.'}
+      format.json {head :no_content}
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_listing
-      @listing = Listing.find(params[:id])
-      @pictures = @listing.pictures
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_listing
+    @listing = Listing.find(params[:id])
+    @pictures = @listing.pictures
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def listing_params
-      params.require(:listing).permit(:title, :category_id, :owner, :pictures, :tags, :location, :description, :price)
-    end
+  def create_images
+    params[:images].each {|image|
+      @listing.pictures.create(image: image)
+    }
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def listing_params
+    params.require(:listing).permit(:title, :category_id, :owner, :pictures, :tags, :location, :description, :price)
+  end
 end
