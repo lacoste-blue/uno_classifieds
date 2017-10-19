@@ -91,85 +91,20 @@
       </div>
 
       <div class="row">
-
+        <% @listings.last(6).each do |listing| %>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://www.node0it.com/wp-content/uploads/2015/05/Macpcslide.png" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Item One</a>
+                <a href="#"><%= listing.title %></a>
               </h4>
-              <h5>$24.99</h5>
-              <p class="card-text">Description!</p>
+              <h5><%= listing.price %> </h5>
+              <p class="card-text"><%= listing.description %></p>
             </div>
           </div>
         </div>
-
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://www.pixuffle.net/wp-content/uploads/2017/05/mobile.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Item Two</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p class="card-text">Description!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://qvc.scene7.com/is/image/QVC/e/51/e290651.001?$uspdlarge$" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Item Three</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p class="card-text">Description!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://www.a1dallasautopartsandsalvage.com/body_parts-1.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Item Four</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p class="card-text">Description!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://bookiemoji.com/wp-content/uploads/2015/11/books-for-sale.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Item Five</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p class="card-text">Description!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://www.sofasshopping.com/images/products/1/841/gf-2033-gl-sofa-set-cappucino-leather-match_3.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Item Six</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p class="card-text">Description!</p>
-            </div>
-          </div>
-        </div>
-
+        <% end %>
       </div>
       <!-- /.row -->
 
