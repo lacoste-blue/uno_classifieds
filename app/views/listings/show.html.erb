@@ -15,28 +15,28 @@
   <%= @listing.owner %>
 </p>
 
-<h2>Pictures</h2>
-</div>
-
-<div class="row">
-  <ul class="thumbnails files">
-    <% unless @pictures.empty? %>
-        <% @pictures.each do |pic| %>
-            <li class="span3" id="picture_<%= pic.id %>">
-              <div class="thumbnail">
-                <%= image_tag pic.image.url %>
-                <div class="caption">
-                  <p style="text-align: center;">
-                    <%= link_to "Edit picture", image_path(pic) %>
-
-                  </p>
+<p>
+  <strong>Pictures:</strong>
+  
+  <div class="row">
+    <ul class="thumbnails files">
+      <% unless @pictures.empty? %>
+          <% @pictures.each do |pic| %>
+              <li class="span3" id="picture_<%= pic.id %>">
+                <div class="thumbnail">
+                  <%= image_tag pic.image.url %>
+                  <div class="caption">
+                    <p style="text-align: center;">
+                      <%= link_to "Delete picture", pic, method: :delete, data: { confirm: 'Ok??'} %>
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </li>
-        <% end %>
-    <% end %>
-  </ul>
-</div>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+  </div>
+</p>
 
 <p>
   <strong>Tags:</strong>
