@@ -48,14 +48,13 @@ class ListingsController < ApplicationController
   def update
     respond_to do |format|
       if @listing.update(listing_params)
-        if params[:images]
-          create_images
-        end
-        format.html {redirect_to @listing, notice: 'Listing was successfully updated.'}
-        format.json {render :show, status: :ok, location: @listing}
-      else
+        if params[:images] && create_images
+          format.html {redirect_to @listing, notice: 'Listing was successfully updated.'}
+          format.json {render :show, status: :ok, location: @listing}
+        else
         format.html {render :edit}
         format.json {render json: @listing.errors, status: :unprocessable_entity}
+        end
       end
     end
   end
@@ -79,7 +78,11 @@ class ListingsController < ApplicationController
 
   def create_images
     params[:images].each {|image|
-      @listing.pictures.create(image: image)
+      if @listing.pictures.where(image_file_name: image.original_filename).exists?
+        @listing.errors.add(:base, "Existing picture")
+      else
+        @listing.pictures.create(image: image)
+      end
     }
   end
 
