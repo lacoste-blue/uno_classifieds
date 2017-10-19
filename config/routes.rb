@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :listings
   resources :sub_categories
   resources :categories
+  resources :pictures
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   get 'home/index'
