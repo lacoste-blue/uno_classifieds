@@ -2,6 +2,18 @@
 
 <h1>Listings</h1>
 
+<%-# Basic css to make listings readable %>
+<style>
+  th, td {
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+  }
+
+    thead {
+      border-bottom: 1px solid black;
+    }
+</style>
+
 <table>
   <thead>
     <tr>
@@ -23,7 +35,16 @@
         <td><%= listing.title %></td>
         <td><%= listing.category.name %></td>
         <td><%= listing.owner %></td>
-        <td><%= listing.images %></td>
+        <td>
+          <% if listing.pictures.first %>
+              <div class=thumbnail"><%= link_to image_tag(listing.pictures.first.image.url(:thumb), class: 'media-object'),
+                              listing_path(listing), target: '_blank'  %>
+              </div>
+          <% else %>
+            No picture
+
+          <% end %>
+        </td>
         <td><%= listing.tags %></td>
         <td><%= listing.location %></td>
         <td><%= listing.description %></td>
