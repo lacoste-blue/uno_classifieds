@@ -23,8 +23,12 @@
         <td><%= listing.title %></td>
         <td><%= listing.category.name %></td>
         <td><%= listing.owner %></td>
-        <td><%= link_to image_tag(listing.image.url, class: 'media-object'),
-        listing.image.url, target: '_blank'  %></td>
+        <% if listing.pictures.first %>
+            <div class=thumbnail"><%= link_to image_tag(listing.pictures.first.image.url(:thumb), class: 'media-object'),
+                            listing_path(listing), target: '_blank'  %>
+            </div>
+        <% end %>
+
         <td><%= listing.tags %></td>
         <td><%= listing.location %></td>
         <td><%= listing.description %></td>
