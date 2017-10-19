@@ -10,6 +10,7 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+
   end
 
   # GET /listings/new
@@ -28,6 +29,12 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
       if @listing.save
+
+        if params[:images]
+          params[:images].each {|image|
+            @listing.pictures.create(image: image)
+          }
+        end
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
         format.json { render :show, status: :created, location: @listing }
       else
@@ -65,10 +72,11 @@ class ListingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
       @listing = Listing.find(params[:id])
+      @pictures = @listing.pictures
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:title, :category_id, :owner, :images, :tags, :location, :description, :price)
+      params.require(:listing).permit(:title, :category_id, :owner, :pictures, :tags, :location, :description, :price)
     end
 end
