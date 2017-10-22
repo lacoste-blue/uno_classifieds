@@ -6,7 +6,9 @@ class Picture < ApplicationRecord
                     :styles => {
                         :thumb => "50x50",
                         :medium => "200x200",
-                        :big => "600x400#"}
+                        :big => "600x400#",
+                        :large=>"825x452#"
+  }
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 end
