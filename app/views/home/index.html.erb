@@ -19,7 +19,7 @@
       <h1 class="my-4">Categories</h1>
       <div class="list-group">
         <% @categories.each do |category| %>
-            <a href="#" class="list-group-item"><%= category.name %></a>
+            <%= link_to category.name.titleize, listings_path(category_id: category.id), class: 'list-group-item' %>
         <% end %>
       </div>
 
