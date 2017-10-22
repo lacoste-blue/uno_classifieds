@@ -57,21 +57,7 @@
 
       <div class="row">
         <% @listings.last(6).each do |listing| %>
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <% if listing.pictures.first %>
-              <%= link_to image_tag(listing.pictures.first.image.url(:thumb), class: 'media-object'),
-                            listing_path(listing), target: '_blank'  %>
-              <% end %>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#"><%= listing.title %></a>
-              </h4>
-              <h5><%= listing.price %> </h5>
-              <p class="card-text"><%= listing.description %></p>
-            </div>
-          </div>
-        </div>
+        <%= render listing %>
         <% end %>
       </div>
       <!-- /.row -->

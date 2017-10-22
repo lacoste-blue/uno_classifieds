@@ -2,59 +2,8 @@
 
 <h1>Listings</h1>
 
-<%-# Basic css to make listings readable %>
-<style>
-  th, td {
-    padding: 5px 10px 5px 10px;
-    text-align: center;
-  }
-
-    thead {
-      border-bottom: 1px solid black;
-    }
-</style>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Category</th>
-      <th>Owner</th>
-      <th>Images</th>
-      <th>Tags</th>
-      <th>Location</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th colspan="10"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @listings.each do |listing| %>
-      <tr>
-        <td><%= listing.title %></td>
-        <td><%= listing.category.name %></td>
-        <td><%= listing.owner %></td>
-        <td>
-          <% if listing.pictures.first %>
-              <div class=thumbnail"><%= link_to image_tag(listing.pictures.first.image.url(:thumb), class: 'media-object'),
-                              listing_path(listing), target: '_blank'  %>
-              </div>
-          <% else %>
-            No picture
-
-          <% end %>
-        </td>
-        <td><%= listing.tags %></td>
-        <td><%= listing.location %></td>
-        <td><%= listing.description %></td>
-        <td><%= humanized_money_with_symbol listing.price %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<div class="row">
+  <% @listings.last(6).each do |listing| %>
+  <%= render listing %>
+  <% end %>
+</div>
