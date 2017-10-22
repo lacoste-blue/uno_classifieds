@@ -12,6 +12,9 @@
       </h4>
       <h5><%= humanized_money_with_symbol listing.price %> </h5>
       <p class="card-text"><%= listing.description %></p>
+      <p class="card-text">
+        <%= link_to "See more in #{Category.find(listing.category_id).name.titleize}", listings_path(category_id: listing.category_id) %>
+      </p>
     </div>
   </div>
 </div>
