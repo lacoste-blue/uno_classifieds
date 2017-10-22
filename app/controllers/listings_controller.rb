@@ -6,6 +6,8 @@ class ListingsController < ApplicationController
   # GET /listings.json
   def index
     @listings = Listing.all
+
+    @listings = @listings.by_category(params[:category_id]) if params[:category_id]
   end
 
   # GET /listings/1
