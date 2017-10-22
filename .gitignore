@@ -26,3 +26,4 @@
 app/.DS_Store
 app/views/.DS_Store
 public/.DS_Store
+public/images/*
