@@ -59,7 +59,10 @@
         <% @listings.last(6).each do |listing| %>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://www.node0it.com/wp-content/uploads/2015/05/Macpcslide.png" alt=""></a>
+            <% if listing.pictures.first %>
+              <%= link_to image_tag(listing.pictures.first.image.url(:thumb), class: 'media-object'),
+                            listing_path(listing), target: '_blank'  %>
+              <% end %>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="#"><%= listing.title %></a>
