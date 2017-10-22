@@ -1,14 +1,16 @@
 <div class="col-lg-4 col-md-6 mb-4">
   <div class="card h-100">
     <% if listing.pictures.first %>
-      <%= link_to image_tag(listing.pictures.first.image.url(:thumb), class: 'media-object'),
+      <center style="padding-top: 5px;">
+        <%= link_to image_tag(listing.pictures.first.image.url(:thumb)),
                     listing_path(listing), target: '_blank'  %>
+      </center>
       <% end %>
     <div class="card-body">
       <h4 class="card-title">
-        <a href="#"><%= listing.title %></a>
+        <%= link_to listing.title, listing %>
       </h4>
-      <h5><%= listing.price %> </h5>
+      <h5><%= humanized_money_with_symbol listing.price %> </h5>
       <p class="card-text"><%= listing.description %></p>
     </div>
   </div>
