@@ -14,15 +14,21 @@
         </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Listings
+            <span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;Listings
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to('View All', listings_path, class: "dropdown-item") %>
             <%= link_to('Create New', new_listing_path, class: "dropdown-item") %>
           </div>
         </li>
-        <li class="nav-item">
-          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<%= current_user.name %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
+          </div>
         </li>
       </ul>
     </div>
