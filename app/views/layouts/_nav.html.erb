@@ -30,6 +30,7 @@
             <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<%= current_user.name %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to('My Account', edit_user_registration_path, class: "dropdown-item") %>
             <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
           </div>
         </li>
