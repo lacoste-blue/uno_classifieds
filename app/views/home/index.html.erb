@@ -36,8 +36,7 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
-            <%= link_to image_tag(@listings.last.pictures.first.image.url(:large)),
-                        listing_path(@listings.last), target: '_blank', :class => 'd-block img-fluid'  %>
+            <%= last_picture %>
           </div>
           <div class="carousel-item">
             <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
@@ -57,7 +56,7 @@
       </div>
 
       <div class="row">
-        <% @listings.last(6).each do |listing| %>
+        <% recent_listings(6).each do |listing| %>
         <%= render listing %>
         <% end %>
       </div>
