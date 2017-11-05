@@ -29,10 +29,12 @@ class ListingsController < ApplicationController
   # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
+    # TODO change this to id and add reference in table later
+    @listing.owner = current_user.name
 
     respond_to do |format|
       if @listing.save
-
+        
         if params[:images]
           create_images
         end
