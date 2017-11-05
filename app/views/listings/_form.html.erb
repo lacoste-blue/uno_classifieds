@@ -21,11 +21,6 @@
       <%= f.collection_select(:category_id, Category.all, :id, :name, {:prompt => true}, {class: "form-control"}) %>
     </div>
 
-    <div class="field">
-      <%= f.label :owner %>
-      <%= f.text_field :owner, class: "form-control" %>
-    </div>
-
     <div class="control-group">
       <%= f.label :pictures, :class => 'control-label' %>
       <div class="row">
