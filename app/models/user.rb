@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validate :email_domain
+  has_many :listings
 
   def email_domain
      domain = email.split("@").last
