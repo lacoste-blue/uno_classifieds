@@ -3,7 +3,7 @@
     <% if listing.pictures.first %>
       <center style="padding-top: 5px;">
         <%= link_to image_tag(listing.pictures.first.image.url(:thumb)),
-                    listing_path(listing), target: '_blank'  %>
+                    listing_path(listing), target: '_blank', :class => 'thumbnail'  %>
       </center>
       <% end %>
     <div class="card-body">
