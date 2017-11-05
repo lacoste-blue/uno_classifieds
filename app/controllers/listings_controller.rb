@@ -71,6 +71,22 @@ class ListingsController < ApplicationController
     end
   end
 
+  def grid
+    respond_to do |format|
+      current_user.set_to_grid_view
+      format.html {redirect_to listings_url, notice: 'View switched to grid.'}
+      format.json {head :no_content}
+    end
+  end
+
+  def list
+    respond_to do |format|
+      current_user.set_to_list_view
+      format.html {redirect_to listings_url, notice: 'View switched to list.'}
+      format.json {head :no_content}
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_listing

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'listings/grid' => 'listings#grid'
+  get 'listings/list' => 'listings#list'
   resources :listings
   resources :sub_categories
   resources :categories
