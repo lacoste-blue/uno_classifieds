@@ -12,4 +12,13 @@ class User < ApplicationRecord
        errors.add(:email, "Invalid Domain") if domain != "uno.edu"
      end
   end
+
+  def set_to_grid_view
+    update_attribute(:listing_view_type, "grid")
+  end
+
+  def set_to_list_view
+    update_attribute(:listing_view_type, "list")
+  end
+
 end
