@@ -17,6 +17,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Seller</th>
       <th>Location</th>
       <th>Description</th>
       <th>Price</th>
@@ -27,7 +28,8 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
-        <td><%= listing.title %></td>
+        <td><%= link_to listing.title, listing %></td>
+        <td><%= listing.user.name %></td>
         <td><%= listing.location %></td>
         <td><%= listing.description %></td>
         <td><%= humanized_money_with_symbol listing.price %></td>

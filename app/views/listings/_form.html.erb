@@ -22,8 +22,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :owner %>
-      <%= f.text_field :owner, class: "form-control" %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
     </div>
 
     <div class="control-group">
