@@ -1,7 +1,7 @@
 <h1>Listings <%= " in the #{Category.find(params[:category_id]).name.titleize} category" if params[:category_id] %>
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expaneded="false">
-      View
+      <%= current_user.listing_view_type.titleize %>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
       <%= link_to('Grid', { :controller => :listings, :action => :grid }, class: "dropdown-item") %>
@@ -9,15 +9,15 @@
     </div>
   </div>
 </h1>
-<p>View type: <%= current_user.listing_view_type.titleize %></p>
 <br>
 
 <% if current_user.listing_view_type == "list" %>
 
-<table>
+<table class='table'>
   <thead>
     <tr>
       <th>Title</th>
+      <th>Seller</th>
       <th>Location</th>
       <th>Description</th>
       <th>Price</th>
@@ -28,7 +28,8 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
-        <td><%= listing.title %></td>
+        <td><%= link_to listing.title, listing %></td>
+        <td><%= listing.user.name %></td>
         <td><%= listing.location %></td>
         <td><%= listing.description %></td>
         <td><%= humanized_money_with_symbol listing.price %></td>
@@ -36,6 +37,7 @@
       </tr>
     <% end %>
   </tbody>
+</table>
 
   <% else %>
 
