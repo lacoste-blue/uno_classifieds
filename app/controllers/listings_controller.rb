@@ -8,6 +8,7 @@ class ListingsController < ApplicationController
     @listings = Listing.all
 
     @listings = @listings.by_category(params[:category_id]) if params[:category_id]
+    @listings = Listing.tagged_with(params[:tag]) if params[:tag]
   end
 
   # GET /listings/1
