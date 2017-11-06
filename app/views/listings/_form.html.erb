@@ -1,7 +1,7 @@
 <%= form_for @listing, :html => {multipart: true} do |f| %>
     <% if @listing.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+          <h2><%= pluralize(@listing.errors.count, 'error') %> prohibited this listing from being saved:</h2>
 
           <ul>
             <% @listing.errors.full_messages.each do |message| %>
@@ -13,7 +13,7 @@
 
     <div class="field">
       <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
+      <%= f.text_field :title, class: 'form-control' %>
     </div>
 
     <div class="field">
@@ -36,28 +36,29 @@
         </ul>
       </div>
       <div class="controls">
-        <%= file_field_tag "images[]", type: :file, multiple: true %>
+        <%= file_field_tag 'images[]', type: :file, multiple: true %>
       </div>
     </div>
 
+    <br>
     <div class="field">
-      <%= f.label :all_tags %>
-      <%= f.text_field :all_tags, placeholder: 'Tags separated by commas' %>
+      <%= f.label :all_tags %><br>
+      <%= f.text_field :all_tags, class: 'form-control', placeholder: 'Tags separated by commas' %>
     </div>
 
     <div class="field">
       <%= f.label :location %>
-      <%= f.text_field :location, class: "form-control" %>
+      <%= f.text_field :location, class: 'form-control' %>
     </div>
 
     <div class="field">
       <%= f.label :description %>
-      <%= f.text_area :description, class: "form-control" %>
+      <%= f.text_area :description, class: 'form-control' %>
     </div>
 
     <div class="field">
       <%= f.label :price %>
-      <%= f.text_field :price, class: "form-control" %>
+      <%= f.text_field :price, class: 'form-control' %>
     </div>
 
     <div class="actions">
