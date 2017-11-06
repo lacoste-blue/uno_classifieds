@@ -22,5 +22,3 @@ class Listing < ApplicationRecord
   end
 
 end
-
-
