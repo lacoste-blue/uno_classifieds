@@ -14,6 +14,8 @@
       <p class="card-text"><%= listing.description %></p>
       <p class="card-text">
         <%= link_to "See more in #{listing.category.name.titleize}", listings_path(category_id: listing.category_id) %>
+        <br> See more by poster:
+        <%= link_to listing.user.name, listings_path(user_id: listing.user.id) %>
         <% if listing.tags.exists? %>
         <br> See more by tags:
         <!-- <%= link_to "See more by tags: #{listing.all_tags}", listings_path(category_id: listing.category_id) %> -->

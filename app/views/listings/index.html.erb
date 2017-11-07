@@ -1,11 +1,12 @@
-<h1>Listings <%= " in the #{Category.find(params[:category_id]).name.titleize} category" if params[:category_id] %>
+<h1><%= index_welcome(params) %>
   <div class="dropdown">
+    <br>
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expaneded="false">
       <%= current_user.listing_view_type.titleize %>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <%= link_to('Grid', { :controller => :listings, :action => :grid }, class: "dropdown-item") %>
-      <%= link_to('List', { :controller => :listings, :action => :list }, class: "dropdown-item") %>
+      <%= link_to('Grid', { :controller => :listings, :action => :grid, :params => params }, class: "dropdown-item") %>
+      <%= link_to('List', { :controller => :listings, :action => :list, :params => params }, class: "dropdown-item") %>
     </div>
   </div>
 </h1>
@@ -19,6 +20,7 @@
       <th>Seller</th>
       <th>Location</th>
       <th>Description</th>
+      <th>Tags</th>
       <th>Price</th>
       <th colspan="10"></th>
     </tr>
@@ -28,12 +30,11 @@
     <% @listings.each do |listing| %>
       <tr>
         <td><%= link_to listing.title, listing %></td>
-        <td><%= listing.user.name %></td>
+        <td><%= link_to listing.user.name, listings_path(user_id: listing.user_id) %></td>
         <td><%= listing.location %></td>
         <td><%= listing.description %></td>
-        <td><%= listing.all_tags %></td>
+        <td><%= link_tags(listing.tags) %></td>
         <td><%= humanized_money_with_symbol listing.price %></td>
-
       </tr>
     <% end %>
   </tbody>
