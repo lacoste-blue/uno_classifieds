@@ -6,6 +6,7 @@ class Listing < ApplicationRecord
   has_many :tags, through: :taggings
 
   scope :by_category, -> (category_id) { where(:category_id => category_id) }
+  scope :by_user, -> (user_id) {where(:user_id => user_id)}
   scope :has_picture, -> { includes(:pictures).where.not(pictures: {id: nil}) }
 
   def all_tags=(names)
