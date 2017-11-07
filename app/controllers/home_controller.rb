@@ -6,3 +6,4 @@ class HomeController < ApplicationController
     @listings = Listing.all
   end
 end
+
