@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
-  
-  
+  skip_authorization_check
+
 
   # GET /pictures/1
   # GET /pictures/1.json

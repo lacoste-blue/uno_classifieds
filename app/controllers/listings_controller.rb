@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :action_name]
+  load_and_authorize_resource
 
 
   # GET /listings
