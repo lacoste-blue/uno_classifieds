@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     else
       can :read, :all
+      can [:list, :grid], Listing
       can [:create, :update, :delete], Listing, user_id: user.id
     end
     #
