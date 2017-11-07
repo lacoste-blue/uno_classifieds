@@ -82,7 +82,7 @@ class ListingsController < ApplicationController
   def grid
     respond_to do |format|
       current_user.set_to_grid_view
-      format.html {redirect_to listings_url, notice: 'View switched to grid.'}
+      format.html {redirect_to listings_url(redirect_params(params)), notice: 'View switched to grid.'}
       format.json {head :no_content}
     end
   end
@@ -90,7 +90,9 @@ class ListingsController < ApplicationController
   def list
     respond_to do |format|
       current_user.set_to_list_view
-      format.html {redirect_to listings_url, notice: 'View switched to list.'}
+      puts '_________________________________________________'
+      puts params
+      format.html {redirect_to listings_url(redirect_params(params)), notice: 'View switched to list.'}
       format.json {head :no_content}
     end
   end
@@ -115,5 +117,9 @@ class ListingsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def listing_params
     params.require(:listing).permit(:title, :category_id, :user_id, :pictures, :all_tags, :location, :description, :price)
+  end
+
+  def redirect_params(params)
+    params.permit(:category_id, :user_id, :tag)
   end
 end

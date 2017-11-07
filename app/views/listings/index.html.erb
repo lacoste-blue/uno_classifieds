@@ -5,8 +5,8 @@
       <%= current_user.listing_view_type.titleize %>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <%= link_to('Grid', { :controller => :listings, :action => :grid }, class: "dropdown-item") %>
-      <%= link_to('List', { :controller => :listings, :action => :list }, class: "dropdown-item") %>
+      <%= link_to('Grid', { :controller => :listings, :action => :grid, :params => params }, class: "dropdown-item") %>
+      <%= link_to('List', { :controller => :listings, :action => :list, :params => params }, class: "dropdown-item") %>
     </div>
   </div>
 </h1>
