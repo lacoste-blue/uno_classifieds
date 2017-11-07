@@ -9,7 +9,7 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-      can
+      can [:create, :update, :delete], Listing, user_id: user.id
     end
     #
     # The first argument to `can` is the action you are giving the user

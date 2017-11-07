@@ -13,10 +13,6 @@
       <h5><%= humanized_money_with_symbol listing.price %> </h5>
       <p class="card-text"><%= listing.description %></p>
       <p class="card-text">
-<<<<<<< HEAD
-        <%= link_to "See more in #{Category.find(listing.category_id).name.titleize}", listings_path(category_id: listing.category_id) %>
-      </p>
-=======
         <%= link_to "See more in #{listing.category.name.titleize}", listings_path(category_id: listing.category_id) %>
         <% if listing.tags.exists? %>
         <br> See more by tags:
@@ -24,8 +20,6 @@
         <%= link_tags(listing.tags) %>
         <% end %>
       </p>
-
->>>>>>> b5d562dc2ce4a0b6227d665236f86fb89afb508e
     </div>
   </div>
 </div>

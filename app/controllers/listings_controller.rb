@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :action_name]
+  load_and_authorize_resource
 
 
   # GET /listings
@@ -107,10 +108,6 @@ class ListingsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def listing_params
-<<<<<<< HEAD
-    params.require(:listing).permit(:title, :category_id, :user_id, :pictures, :tags, :location, :description, :price)
-=======
     params.require(:listing).permit(:title, :category_id, :user_id, :pictures, :all_tags, :location, :description, :price)
->>>>>>> b5d562dc2ce4a0b6227d665236f86fb89afb508e
   end
 end
