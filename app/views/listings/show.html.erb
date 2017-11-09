@@ -37,7 +37,7 @@
            <br>
           <div class="category"> <h2>Category: <%= @listing.category.name %> </h2></div>
           <div class="tags"> <h2> Tags: <%= link_tags(@listing.tags) if @listing.tags.exists? %> </h2></div>
-			    <div class="price"> <h2> Price: <%= @listing.price %></h2></div>
+			    <div class="price"> <h2> Price: <%= humanized_money_with_symbol @listing.price %></h2></div>
 			    <br>
 
 		      <button type="button" class="btn btn-primary btn-lg">Contact Seller</button>
