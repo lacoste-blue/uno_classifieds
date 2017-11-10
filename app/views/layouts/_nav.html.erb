@@ -45,11 +45,10 @@
                 <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
               </div>
             </li>
-
-            <li class="nav-item">
-              <%= link_to root_path, class: "nav-link home-button" do %>
-                  <i class="glyphicon glyphicon-home"></i> Home
-              <% end %>
+            <li class="nav-item" >
+            <%= link_to root_path, class: "nav-link home-button" do  %>
+                <i class="glyphicon glyphicon-home" ></i> Home
+            <% end %>
             </li>
         <% end %>
       </ul>

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validate :email_domain
+  has_many :listings
 
   def email_domain
      domain = email.split("@").last
@@ -12,4 +13,13 @@ class User < ApplicationRecord
        errors.add(:email, "Invalid Domain") if domain != "uno.edu"
      end
   end
+
+  def set_to_grid_view
+    update_attribute(:listing_view_type, "grid")
+  end
+
+  def set_to_list_view
+    update_attribute(:listing_view_type, "list")
+  end
+
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "pictures/new", type: :view do
   before(:each) do
-    assign(:picture, Picture.new())
+    assign(:picture, Picture.new)
   end
 
   it "renders new picture form" do
