@@ -20,7 +20,9 @@ class Listing < ApplicationRecord
   end
 
   def self.tagged_with(name)
-    Tag.find_by_name!(name).listings
+    listings = []
+    Tag.find_by_fuzzy_name(name).each {|tag|  listings.append(tag.listings)}
+    return listings
   end
 
 end
