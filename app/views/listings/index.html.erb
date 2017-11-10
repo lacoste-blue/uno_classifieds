@@ -35,6 +35,11 @@
         <td><%= listing.description %></td>
         <td><%= link_tags(listing.tags) %></td>
         <td><%= humanized_money_with_symbol listing.price %></td>
+        <% if can? :update, listing %>
+        <td><%= link_to 'Edit', edit_listing_path(listing), class: 'btn btn-success' %></td>
+        <% else %>
+        <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
