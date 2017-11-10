@@ -9,34 +9,48 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="nav-item">
+        <form class="form-inline my-2 my-lg-0 mr-lg-2 ">
+          <div class="input-group">
+            <input class="form-control search-bar" type="text" placeholder="search for....">
+            <span class="input-group-btn">
+            <button class="btn btn-primary search-btn" type="button">
+              <i class="glyphicon glyphicon glyphicon-search">
+              </i>
+            </button>
+          </span>
+          </div>
+        </form>
+      </ul>
+
       <ul class="navbar-nav ml-auto">
         <% if current_user %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;Listings
-            </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;Listings
+              </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <%= link_to('View All', listings_path, class: "dropdown-item") %>
-              <%= link_to('Create New', new_listing_path, class: "dropdown-item") %>
-            </div>
-          </li>
+                <%= link_to('View All', listings_path, class: "dropdown-item") %>
+                <%= link_to('Create New', new_listing_path, class: "dropdown-item") %>
+              </div>
+            </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<%= current_user.name %>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <%= link_to('My Account', edit_user_registration_path, class: "dropdown-item") %>
-              <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
-            </div>
-          </li>
-
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<%= current_user.name %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to('My Account', edit_user_registration_path, class: "dropdown-item") %>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
+              </div>
+            </li>
             <li class="nav-item" >
             <%= link_to root_path, class: "nav-link home-button" do  %>
                 <i class="glyphicon glyphicon-home" ></i> Home
             <% end %>
             </li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
   </div>
