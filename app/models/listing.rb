@@ -21,6 +21,7 @@ class Listing < ApplicationRecord
 
   def self.tagged_with(name)
     listings = []
+    logger.debug "In listing model: About to do a fuzzy match - on tag: #{name}"
     Tag.find_by_fuzzy_name(name).each {|tag|  listings.append(tag.listings)}
     return listings
   end
