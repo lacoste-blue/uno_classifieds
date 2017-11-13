@@ -15,10 +15,12 @@ class User < ApplicationRecord
   end
 
   def set_to_grid_view
+    logger.debug "In user model: About to set view to grid - was: #{listing_view_type}"
     update_attribute(:listing_view_type, "grid")
   end
 
   def set_to_list_view
+    logger.debug "In user model: About to set view to list - was: #{listing_view_type}"
     update_attribute(:listing_view_type, "list")
   end
 
