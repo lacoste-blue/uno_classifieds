@@ -28,6 +28,9 @@
 
   <tbody>
     <% @listings.each do |listing| %>
+      <% if listing[0] != nil %>
+        <% listing = listing[0] %>
+      <% end %>
       <tr>
         <td><%= link_to listing.title, listing %></td>
         <td><%= link_to listing.user.name, listings_path(user_id: listing.user_id) %></td>
