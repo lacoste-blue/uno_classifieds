@@ -13,6 +13,9 @@ Layout/TrailingBlankLines:
 Style/StringLiterals:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Layout/SpaceAroundOperators:
   AllowForAlignment: false
 
