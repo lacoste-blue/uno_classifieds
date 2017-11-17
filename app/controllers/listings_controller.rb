@@ -91,8 +91,6 @@ class ListingsController < ApplicationController
   def list
     respond_to do |format|
       current_user.set_to_list_view
-      puts '_________________________________________________'
-      puts params
       format.html {redirect_to listings_url(redirect_params(params)), notice: 'View switched to list.'}
       format.json {head :no_content}
     end
