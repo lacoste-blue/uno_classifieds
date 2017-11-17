@@ -33,6 +33,13 @@ a {
   }
 }
 
+.a-blank {
+  &:hover {
+    background-color: transparent;
+    opacity: 0.5;
+  }
+}
+
 th {
   padding-bottom: 5px;
 }
