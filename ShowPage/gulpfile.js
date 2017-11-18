@@ -11,11 +11,11 @@ gulp.task('copy', function() {
       '!**/bootstrap-theme.*',
       '!**/*.map'
     ])
-    .pipe(gulp.dest('vendor/bootstrap'))
+    .pipe(gulp.dest('vendor/bootstrap'));
 
   gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
     .pipe(gulp.dest('vendor/jquery'))
-})
+});
 
 // Default task
 gulp.task('default', ['copy']);
@@ -27,7 +27,7 @@ gulp.task('browserSync', function() {
       baseDir: ''
     },
   })
-})
+});
 
 // Dev task with browserSync
 gulp.task('dev', ['browserSync'], function() {

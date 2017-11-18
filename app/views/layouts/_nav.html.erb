@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand-lg navbar-color fixed-top">
   <div class="container">
     <div class="navbar-brand">
-      <%= link_to image_tag('uno_logo.png', size: "40x40", class: "d-inline-block align-top"), root_path, :class => 'a-blank' %>
-      &nbsp;<%= link_to "UNO CLASSIFIEDS", root_path, class: "brand-text" %>
+      <%= link_to image_tag('uno_logo.png', size: '40x40', class: 'd-inline-block align-top'), root_path, :class => 'a-blank' %>
+      &nbsp;<%= link_to 'UNO CLASSIFIEDS', root_path, class: 'brand-text' %>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -31,8 +31,8 @@
                 <span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;Listings
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <%= link_to('View All', listings_path, class: "dropdown-item") %>
-                <%= link_to('Create New', new_listing_path, class: "dropdown-item") %>
+                <%= link_to('View All', listings_path, class: 'dropdown-item') %>
+                <%= link_to('Create New', new_listing_path, class: 'dropdown-item') %>
               </div>
             </li>
 
@@ -41,12 +41,12 @@
                 <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<%= current_user.name %>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <%= link_to('My Account', edit_user_registration_path, class: "dropdown-item") %>
-                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
+                <%= link_to('My Account', edit_user_registration_path, class: 'dropdown-item') %>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item') %>
               </div>
             </li>
             <li class="nav-item" >
-            <%= link_to root_path, class: "nav-link home-button" do  %>
+            <%= link_to root_path, class: 'nav-link home-button' do  %>
                 <i class="glyphicon glyphicon-home" ></i> Home
             <% end %>
             </li>
