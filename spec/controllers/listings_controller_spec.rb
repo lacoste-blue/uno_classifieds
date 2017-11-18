@@ -47,6 +47,12 @@ RSpec.describe ListingsController, type: :controller do
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
+
+    it 'should let a user see all the listings' do
+      login_with create(:user)
+      get :index
+      expect(response).to render_template(:index)
+    end
   end
 
   describe 'GET #show' do
