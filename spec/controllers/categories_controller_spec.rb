@@ -29,20 +29,37 @@ RSpec.describe CategoriesController, type: :controller do
   # Category. As you add validations to Category, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip('Add a hash of attributes valid for your model')
+    {:name => 'Test category',
+     :description => 'This is a test'}
   }
 
   let(:invalid_attributes) {
-    skip('Add a hash of attributes invalid for your model')
+    {:name => '',
+     :description => ''}
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CategoriesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) {{}}
+
+  describe 'anonymous user' do
+    before :each do
+      login_with nil
+    end
+
+    it 'should be redirected to signin' do
+      get :index
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
+  before :each do
+    login_with create(:user)
+  end
 
   describe 'GET #index' do
-    it 'returns a success response' do
+    it 'returns a success response ok' do
       category = Category.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
@@ -87,9 +104,15 @@ RSpec.describe CategoriesController, type: :controller do
     end
 
     context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'new' template)" do
+      it 'does not save the category' do
+        expect{
+          post :create, params: {category: invalid_attributes}, session: valid_session
+        }.to_not change(Category, :count)
+      end
+
+      it 'redirects to new' do
         post :create, params: {category: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to render_template :new
       end
     end
   end
@@ -97,7 +120,8 @@ RSpec.describe CategoriesController, type: :controller do
   describe 'PUT #update' do
     context 'with valid params' do
       let(:new_attributes) {
-        skip('Add a hash of attributes valid for your model')
+        { :name => 'updated name',
+          :description => 'updated description'}
       }
 
       it 'updates the requested category' do
