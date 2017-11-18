@@ -1,16 +1,12 @@
 class PicturesController < ApplicationController
   skip_authorization_check
-
+  respond_to :html, :json
 
   # GET /pictures/1
   # GET /pictures/1.json
   def show
     @picture = Picture.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @picture }
-    end
+    respond_with(@picture)
   end
 
   # GET /pictures/new
@@ -18,44 +14,14 @@ class PicturesController < ApplicationController
   def new
     @listing = Listing.find(params[:listing_id])
     @picture = @listing.pictures.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @picture }
-    end
-  end
-
-  # GET /pictures/1/edit
-  def edit
-    #@listing = Listing.find(params[:listing_id])
-
-    @picture = Picture.find(params[:id])
-    # @picture = Picture.find(params[:id])
+    respond_with(@picture)
   end
 
   # POST /pictures
   # POST /pictures.json
   def create
     @picture = Picture.new(params[:picture])
-  end
-
-  # PUT /pictures/1
-  # PUT /pictures/1.json
-  def update
-
-    # @listing = Listing.find(params[:listing_id])
-
-    @picture = Picture.find(params[:id])
-
-    respond_to do |format|
-      if @picture.update_attributes(picture_params)
-        format.html { redirect_to :back, notice: 'Picture was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with(@picture)
   end
 
   # DELETE /pictures/1
@@ -64,14 +30,8 @@ class PicturesController < ApplicationController
     #@listing = Listing.find(params[:listing_id])
     #@picture = @listing.pictures.find(params[:id])
     @picture = Picture.find(params[:id])
-    @picture.destroy
-
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.js
-    end
+    redirect_back fallback_location: listing_path if @picture.destroy
   end
-
 
   private
 
