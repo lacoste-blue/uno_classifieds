@@ -8,13 +8,25 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    redirect_params(params).each do |key, value| {
+
+    ###
+    logger.debug "In listing controller index - at top - params: #{params}"
+    if params[:search]
+      @listings = []
+        (Listing.search params[:search]).each do |listing|
+          @listings += Listing.where(id: [listing._id]).to_a
+        end
+      logger.debug "In listing controller index - at after if params search - @listings: #{@listings}"
+    else
+
+
+      redirect_params(params).each do |key, value| {
         @listings = @listings.public_send(key, value) => value
-    }
-    end
+      }
+      end
 
-    respond_with(@listings)
-
+      respond_with(@listings)
+    end ###
   end
 
   # GET /listings/1
@@ -95,10 +107,10 @@ class ListingsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def listing_params
-    params.require(:listing).permit(:title, :tag, :category_id, :user_id, :pictures, :all_tags, :location, :description, :price)
+    params.require(:listing).permit(:title, :search, :tag, :category_id, :user_id, :pictures, :all_tags, :location, :description, :price)
   end
 
   def redirect_params(params)
-    params.permit(:category_id, :user_id, :tag)
+    params.permit(:category_id, :user_id, :tag, :search)
   end
 end
