@@ -43,15 +43,6 @@ ActiveRecord::Schema.define(version: 20171110220422) do
     t.index ["listing_id"], name: "index_pictures_on_listing_id"
   end
 
-  create_table "sub_categories", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["category_id"], name: "index_sub_categories_on_category_id"
-  end
-
   create_table "taggings", force: :cascade do |t|
     t.integer  "listing_id"
     t.integer  "tag_id"
