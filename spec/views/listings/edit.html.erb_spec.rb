@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe 'listings/edit', type: :view do
+RSpec.describe 'listings/edit', :type => :view do
   before(:each) do
     @listing = assign(:listing, Listing.create!(
-      :title => 'MyString',
-      :category => 'MyString',
-      :owner => 'MyString',
-      :images => 'MyString',
-      :tags => 'MyString',
-      :location => 'MyString',
-      :description => 'MyText',
-      :price => 1.5
+                                  :title => 'MyString',
+                                  :category => 'MyString',
+                                  :owner => 'MyString',
+                                  :images => 'MyString',
+                                  :tags => 'MyString',
+                                  :location => 'MyString',
+                                  :description => 'MyText',
+                                  :price => 1.5
     ))
   end
 
@@ -18,7 +18,6 @@ RSpec.describe 'listings/edit', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', listing_path(@listing), 'post' do
-
       assert_select 'input#listing_title[name=?]', 'listing[title]'
 
       assert_select 'input#listing_category[name=?]', 'listing[category]'
@@ -37,3 +36,4 @@ RSpec.describe 'listings/edit', type: :view do
     end
   end
 end
+

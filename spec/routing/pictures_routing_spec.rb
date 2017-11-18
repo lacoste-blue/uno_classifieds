@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe PicturesController, type: :routing do
+RSpec.describe(PicturesController, :type => :routing) {
   describe 'routing' do
-
     it 'routes to #index' do
       expect(:get => '/pictures').to route_to('pictures#index')
     end
@@ -34,6 +33,6 @@ RSpec.describe PicturesController, type: :routing do
     it 'routes to #destroy' do
       expect(:delete => '/pictures/1').to route_to('pictures#destroy', :id => '1')
     end
-
   end
-end
+}
+

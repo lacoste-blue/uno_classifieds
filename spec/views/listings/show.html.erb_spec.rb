@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe 'listings/show', type: :view do
+RSpec.describe 'listings/show', :type => :view do
   before(:each) do
     @listing = assign(:listing, Listing.create!(
-      :title => 'Title',
-      :category => 'Category',
-      :owner => 'Owner',
-      :images => 'Images',
-      :tags => 'Tags',
-      :location => 'Location',
-      :description => 'MyText',
-      :price => 2.5
+                                  :title => 'Title',
+                                  :category => 'Category',
+                                  :owner => 'Owner',
+                                  :images => 'Images',
+                                  :tags => 'Tags',
+                                  :location => 'Location',
+                                  :description => 'MyText',
+                                  :price => 2.5
     ))
   end
 
@@ -26,3 +26,4 @@ RSpec.describe 'listings/show', type: :view do
     expect(rendered).to match(/2.5/)
   end
 end
+

@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe CategoriesController, type: :routing do
+RSpec.describe(CategoriesController, :type => :routing) {
   describe 'routing' do
-
     it 'routes to #index' do
       expect(:get => '/categories').to route_to('categories#index')
     end
@@ -34,6 +33,6 @@ RSpec.describe CategoriesController, type: :routing do
     it 'routes to #destroy' do
       expect(:delete => '/categories/1').to route_to('categories#destroy', :id => '1')
     end
-
   end
-end
+}
+

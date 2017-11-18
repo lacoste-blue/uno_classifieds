@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Listings', type: :request do
+RSpec.describe 'Listings', :type => :request do
   describe 'GET /listings' do
     it 'works! (now write some real specs)' do
       get listings_path
@@ -8,3 +8,4 @@ RSpec.describe 'Listings', type: :request do
     end
   end
 end
+
