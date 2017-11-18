@@ -1,21 +1,19 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :action_name]
+  responders :flash
+  respond_to :html, :json
   load_and_authorize_resource
 
 
   # GET /listings
   # GET /listings.json
   def index
-
-    if params[:category_id]
-      @listings = Listing.by_category(params[:category_id])
-    elsif params[:tag]
-      @listings = Listing.tagged_with(params[:tag])
-    elsif params[:user_id]
-      @listings = Listing.by_user(params[:user_id])
-    else
-      @listings = Listing.all
+    redirect_params(params).each do |key, value| {
+        @listings = @listings.public_send(key, value) => value
+    }
     end
+
+    respond_with(@listings)
 
   end
 
@@ -38,62 +36,44 @@ class ListingsController < ApplicationController
   # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
-
-    respond_to do |format|
       if @listing.save
-
         if params[:images]
           create_images
         end
-        format.html {redirect_to @listing, notice: 'Listing was successfully created.'}
-        format.json {render :show, status: :created, location: @listing}
-      else
-        format.html {render :new}
-        format.json {render json: @listing.errors, status: :unprocessable_entity}
+        flash[:notice] = 'Listing was successfully created.'
       end
-    end
+    respond_with(@listing)
   end
 
   # PATCH/PUT /listings/1
   # PATCH/PUT /listings/1.json
   def update
-    respond_to do |format|
       if @listing.update(listing_params)
         if params[:images] && create_images
-          format.html {redirect_to @listing, notice: 'Listing was successfully updated.'}
-          format.json {render :show, status: :ok, location: @listing}
-        else
-        format.html {render :edit}
-        format.json {render json: @listing.errors, status: :unprocessable_entity}
+          flash[:notice] = 'Listing was successfully updated.'
         end
       end
-    end
+    respond_with(@listing)
   end
 
   # DELETE /listings/1
   # DELETE /listings/1.json
   def destroy
-    @listing.destroy
-    respond_to do |format|
-      format.html {redirect_to listings_url, notice: 'Listing was successfully destroyed.'}
-      format.json {head :no_content}
-    end
+    redirect_back fallback_location: listing_path, alert: 'Successfully deleted listing' if @listing.destroy
   end
 
   def grid
-    respond_to do |format|
-      current_user.set_to_grid_view
-      format.html {redirect_to listings_url(redirect_params(params)), notice: 'View switched to grid.'}
-      format.json {head :no_content}
-    end
+    current_user.set_to_grid_view
+    switch_to('grid')
   end
 
   def list
-    respond_to do |format|
-      current_user.set_to_list_view
-      format.html {redirect_to listings_url(redirect_params(params)), notice: 'View switched to list.'}
-      format.json {head :no_content}
-    end
+    current_user.set_to_list_view
+    switch_to('list')
+  end
+
+  def switch_to(type)
+    redirect_to listings_url(redirect_params(params)), notice: "View switched to #{type}."
   end
 
   private
@@ -106,7 +86,7 @@ class ListingsController < ApplicationController
   def create_images
     params[:images].each {|image|
       if @listing.pictures.where(image_file_name: image.original_filename).exists?
-        @listing.errors.add(:base, "Existing picture")
+        @listing.errors.add(:base, 'Existing picture')
       else
         @listing.pictures.create(image: image)
       end

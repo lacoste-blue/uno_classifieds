@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "pictures/index", type: :view do
+RSpec.describe 'pictures/index', type: :view do
   before(:each) do
     assign(:pictures, [
         Picture.create!,
@@ -8,7 +8,7 @@ RSpec.describe "pictures/index", type: :view do
     ])
   end
 
-  it "renders a list of pictures" do
+  it 'renders a list of pictures' do
     render
   end
 end

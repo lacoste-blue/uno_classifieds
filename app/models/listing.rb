@@ -5,9 +5,11 @@ class Listing < ApplicationRecord
   has_many :taggings
   has_many :tags, :through => :taggings
 
-  scope :by_category, ->(category_id) { where(:category_id => category_id) }
-  scope :by_user, ->(user_id) { where(:user_id => user_id) }
+  scope :category_id, ->(category_id) { where(:category_id => category_id) }
+  scope :user_id, ->(user_id) { where(:user_id => user_id) }
   scope :has_picture, -> { includes(:pictures).where.not(:pictures => { :id => nil }) }
+
+  validates :category, :title, :presence => true
 
   def all_tags=(names)
     self.tags = names.split(',').map do |name|
@@ -19,7 +21,7 @@ class Listing < ApplicationRecord
     tags.map(&:name).join(', ')
   end
 
-  def self.tagged_with(name)
+  def self.tag(name)
     listings = []
     logger.debug "In listing model: About to do a fuzzy match - on tag: #{name}"
     Tag.find_by_fuzzy_name(name).each do |tag|

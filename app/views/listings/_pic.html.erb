@@ -3,7 +3,8 @@
     <%= image_tag pic.image.url %>
     <div class="caption">
       <p style="text-align: center;">
-        <%= link_to "Delete picture", pic, method: :delete, data: { confirm: 'Ok??'} %>
+        <%= link_to 'Delete picture', { controller: :pictures, action: :destroy, id: pic.id},
+                      method: :delete, data: { confirm: 'Ok??' }, class: 'btn btn-primary'%>
       </p>
     </div>
   </div>

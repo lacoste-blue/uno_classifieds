@@ -5,14 +5,14 @@
       <%= current_user.listing_view_type.titleize %>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <%= link_to('Grid', { :controller => :listings, :action => :grid, :params => params }, class: "dropdown-item") %>
-      <%= link_to('List', { :controller => :listings, :action => :list, :params => params }, class: "dropdown-item") %>
+      <%= link_to('Grid', { :controller => :listings, :action => :grid, :params => params }, class: 'dropdown-item') %>
+      <%= link_to('List', { :controller => :listings, :action => :list, :params => params }, class: 'dropdown-item') %>
     </div>
   </div>
 </h1>
 <br>
 
-<% if current_user.listing_view_type == "list" %>
+<% if current_user.listing_view_type == 'list' %>
 <table class='table'>
   <thead>
     <tr>
@@ -36,7 +36,9 @@
         <td><%= link_tags(listing.tags) %></td>
         <td><%= humanized_money_with_symbol listing.price %></td>
         <% if can? :update, listing %>
-        <td><%= link_to 'Edit', edit_listing_path(listing), class: 'btn btn-success' %></td>
+            <td><%= link_to 'Edit', edit_listing_path(listing), class: 'btn btn-success' %></td>
+            <td><%= link_to 'Delete', listing, :method => :delete, class: 'btn btn-success',
+                            data: { confirm: "Delete listing:  #{listing.title}?"} %></td>
         <% else %>
         <td></td>
         <% end %>

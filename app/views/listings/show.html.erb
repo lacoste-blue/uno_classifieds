@@ -15,7 +15,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
+      <%= flash[:notice] %>
        <!-- Portfolio Item Heading -->
       <h1 class="my-4">
         <%= @listing.title %>
@@ -26,7 +26,7 @@
 
         <div class="col-md-8">
           <% if @listing.pictures.first %>
-           <%= image_tag @listing.pictures.first.image.url(:big), :class => "img-fluid" %>
+           <%= image_tag @listing.pictures.first.image.url(:big), :class => 'img-fluid' %>
           <% end %>
         </div>
 
@@ -52,7 +52,7 @@
       <div class="row">
         <% @listing.pictures.drop(1).each do |pic| %>
         <div class="col-md-3 col-sm-6 mb-4">
-          <%= image_tag pic.image.url(:medium), :class => "img-fluid" %>
+          <%= image_tag pic.image.url(:medium), :class => 'img-fluid' %>
         </div>
         <% end %>
       </div>
