@@ -10,10 +10,13 @@ pipeline {
       parallel {
         stage('Lint') {
           steps {
-            sh '''gem install bundler 
+            retry(count: 2) {
+              sh '''gem install bundler 
 bundle install 
 
 bundle exec rubocop --format html -o rubocop.html || true'''
+            }
+            
             script {
               publishHTML(target: [
                 allowMissing: false,
@@ -30,7 +33,8 @@ bundle exec rubocop --format html -o rubocop.html || true'''
         }
         stage('Unit') {
           steps {
-            sh '''gem install bundler
+            retry(count: 2) {
+              sh '''gem install bundler
 bundle install
 
 
@@ -44,6 +48,8 @@ bundle install
 }
 
 docker kill $(cat .es_container_id)'''
+            }
+            
             script {
               publishHTML(target: [
                 allowMissing: false,
