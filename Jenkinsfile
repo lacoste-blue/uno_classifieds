@@ -11,12 +11,11 @@ pipeline {
         stage('Lint') {
           steps {
             retry(count: 2) {
-              sh '''gem install bundler 
-bundle install 
-
-bundle exec rubocop --format html -o rubocop.html || true'''
+              sh '''gem install bundler > /dev/null
+bundle install > /dev/null'''
             }
             
+            sh 'bundle exec rubocop --format html -o rubocop.html || true'
             script {
               publishHTML(target: [
                 allowMissing: false,
@@ -37,9 +36,12 @@ bundle exec rubocop --format html -o rubocop.html || true'''
               retry(count: 2) {
                 sh '''gem install bundler
 bundle install
-
-
-{
+'''
+              }
+              
+            }
+            
+            sh '''{
   docker run -dt -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.0.0 > .es_container_id
   sleep 30;
   bundle exec rspec spec --format html --out rspec.html
@@ -49,117 +51,113 @@ bundle install
 }
 
 docker kill $(cat .es_container_id)'''
+              script {
+                publishHTML(target: [
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll: true,
+                  reportDir: '',
+                  reportFiles: 'rspec.html',
+                  reportTitles: "Unit Test Report",
+                  reportName: "Unit Test Report"
+                ])
+                
+                publishHTML(target: [
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll: true,
+                  reportDir: 'coverage',
+                  reportFiles: 'coverage/index.html',
+                  reportTitles: "Coverage Report",
+                  reportName: "Coverage Report"
+                ])
               }
               
             }
-            
-            script {
-              publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '',
-                reportFiles: 'rspec.html',
-                reportTitles: "Unit Test Report",
-                reportName: "Unit Test Report"
-              ])
-              
-              publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: 'coverage',
-                reportFiles: 'rcov/index.html',
-                reportTitles: "Coverage Report",
-                reportName: "Coverage Report"
-              ])
+          }
+          stage('Syntax') {
+            steps {
+              sh 'ruby -c **/*.rb'
             }
-            
-          }
-        }
-        stage('Syntax') {
-          steps {
-            sh 'ruby -c **/*.rb'
           }
         }
       }
-    }
-    stage('Build') {
-      parallel {
-        stage('Lint') {
-          steps {
-            echo 'HI'
+      stage('Build') {
+        parallel {
+          stage('Lint') {
+            steps {
+              echo 'HI'
+            }
           }
-        }
-        stage('Unit') {
-          steps {
-            echo 'HI'
+          stage('Unit') {
+            steps {
+              echo 'HI'
+            }
           }
-        }
-        stage('Syntax') {
-          steps {
-            echo 'HI'
+          stage('Syntax') {
+            steps {
+              echo 'HI'
+            }
           }
-        }
-        stage('Quality') {
-          steps {
-            echo 'hi'
+          stage('Quality') {
+            steps {
+              echo 'hi'
+            }
           }
-        }
-        stage('Publish') {
-          steps {
-            echo 'sdfg'
-          }
-        }
-      }
-    }
-    stage('Acceptance') {
-      parallel {
-        stage('Provision') {
-          steps {
-            echo 'hi'
-          }
-        }
-        stage('Deploy') {
-          steps {
-            echo 'hi'
-          }
-        }
-        stage('Smoke') {
-          steps {
-            echo 'hi'
-          }
-        }
-        stage('Functional') {
-          steps {
-            echo 'hi'
+          stage('Publish') {
+            steps {
+              echo 'sdfg'
+            }
           }
         }
       }
-    }
-    stage('Delivered') {
-      parallel {
-        stage('Provision') {
-          steps {
-            echo 'hi'
+      stage('Acceptance') {
+        parallel {
+          stage('Provision') {
+            steps {
+              echo 'hi'
+            }
+          }
+          stage('Deploy') {
+            steps {
+              echo 'hi'
+            }
+          }
+          stage('Smoke') {
+            steps {
+              echo 'hi'
+            }
+          }
+          stage('Functional') {
+            steps {
+              echo 'hi'
+            }
           }
         }
-        stage('Deploy') {
-          steps {
-            echo 'hi'
+      }
+      stage('Delivered') {
+        parallel {
+          stage('Provision') {
+            steps {
+              echo 'hi'
+            }
           }
-        }
-        stage('Smoke') {
-          steps {
-            echo 'hi'
+          stage('Deploy') {
+            steps {
+              echo 'hi'
+            }
           }
-        }
-        stage('Functional') {
-          steps {
-            echo 'hi'
+          stage('Smoke') {
+            steps {
+              echo 'hi'
+            }
+          }
+          stage('Functional') {
+            steps {
+              echo 'hi'
+            }
           }
         }
       }
     }
   }
-}
