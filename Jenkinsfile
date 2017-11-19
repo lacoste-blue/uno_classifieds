@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'application'
+    }
+    
+  }
   stages {
     stage('Verify') {
       parallel {
