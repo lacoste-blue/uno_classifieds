@@ -689,7 +689,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             $.each(css, function(i){
                 if (css[i] !== previousCSS[i]) {
                     tempSpeed = speed;
-
+                    return;
                 }
             });
             speed = tempSpeed;
@@ -1611,7 +1611,7 @@ $(document).ready(function() {
     if (!source_table.hasClass('highlighted')) {
       source_table.find('pre code').each(function(i, e) {hljs.highlightBlock(e, '  ')});
       source_table.addClass('highlighted');
-    }
+    };
   });
 
   var prev_anchor;
@@ -1686,12 +1686,12 @@ $(document).ready(function() {
       // Works only on firefox, but still... - Anyone know a better solution to force favicon on local file?
       $('link[rel="shortcut icon"]').remove();
       $('head').append('<link rel="shortcut icon" type="image/png" href="'+ favicon_path +'" />');
-    }
-      return false;
+    };
+    return false;
   });
 
   if (jQuery.url.attr('anchor')) {
-    var anchor = jQuery.url.attr('anchor');
+    var anchor = jQuery.url.attr('anchor')
     if (anchor.length == 40) {
       $('a.src_link[href=#' + anchor + ']').click();
     } else {
@@ -1699,8 +1699,9 @@ $(document).ready(function() {
     }
   } else {
     $('.group_tabs a:first').click();
-  }
-    $("abbr.timeago").timeago();
+  };
+
+  $("abbr.timeago").timeago();
   $('#loading').fadeOut();
   $('#wrapper').show();
 });

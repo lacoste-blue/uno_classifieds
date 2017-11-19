@@ -24,7 +24,7 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe PicturesController, type: :controller do
-
+  login_admin
   # This should return the minimal set of attributes required to create a valid
   # Picture. As you add validations to Picture, be sure to
   # adjust the attributes here as well.
