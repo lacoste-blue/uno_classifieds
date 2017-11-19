@@ -67,3 +67,4 @@ gem 'elasticsearch-rails'
 gem 'pg'
 gem 'factory_bot_rails'
 gem 'faker'
+gem "rubycritic"
