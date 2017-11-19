@@ -24,8 +24,8 @@ bundle exec rubocop --format html -o rubocop.html || true'''
                 keepAll: true,
                 reportDir: '',
                 reportFiles: 'rubocop.html',
-                reportTitles: "Rubocop Report",
-                reportName: "Rubocop Report"
+                reportTitles: "Lint Report",
+                reportName: "Lint Report"
               ])
             }
             
@@ -60,8 +60,18 @@ docker kill $(cat .es_container_id)'''
                 keepAll: true,
                 reportDir: '',
                 reportFiles: 'rspec.html',
-                reportTitles: "RSpec Report",
-                reportName: "RSpec Report"
+                reportTitles: "Unit Test Report",
+                reportName: "Unit Test Report"
+              ])
+              
+              publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'coverage',
+                reportFiles: 'rcov/index.html',
+                reportTitles: "Coverage Report",
+                reportName: "Coverage Report"
               ])
             }
             
