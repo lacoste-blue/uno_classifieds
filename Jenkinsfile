@@ -5,18 +5,47 @@ pipeline {
       parallel {
         stage('Lint') {
           steps {
-            sh 'echo "Hello world"'
-            echo 'Hello World'
+            sh '''gem install bundler 
+bundle install 
+
+bundle exec rubocop --format html -o rubocop.html || true'''
+            script {
+              publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '',
+                reportFiles: 'rubocop.html',
+                reportTitles: "Rubocop Report",
+                reportName: "Rubocop Report"
+              ])
+            }
+            
           }
         }
         stage('Unit') {
           steps {
-            echo 'Hi'
+            sh '''gem install bundler
+bundle install
+
+bundle exec rspec spec --format html --out rspec.html'''
+            script {
+              publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '',
+                reportFiles: 'rspec.html',
+                reportTitles: "RSpec Report",
+                reportName: "RSpec Report"
+              ])
+            }
+            
           }
         }
         stage('Syntax') {
           steps {
-            echo 'Hi'
+            sh 'ruby -c **/*.rb'
           }
         }
       }
