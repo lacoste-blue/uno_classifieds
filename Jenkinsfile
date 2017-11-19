@@ -33,8 +33,9 @@ bundle exec rubocop --format html -o rubocop.html || true'''
         }
         stage('Unit') {
           steps {
-            retry(count: 2) {
-              sh '''gem install bundler
+            catchError() {
+              retry(count: 2) {
+                sh '''gem install bundler
 bundle install
 
 
@@ -48,6 +49,8 @@ bundle install
 }
 
 docker kill $(cat .es_container_id)'''
+              }
+              
             }
             
             script {
