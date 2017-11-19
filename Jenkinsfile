@@ -33,7 +33,16 @@ bundle exec rubocop --format html -o rubocop.html || true'''
             sh '''gem install bundler
 bundle install
 
-bundle exec rspec spec --format html --out rspec.html'''
+
+{
+  docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.0.0 > .es_container_id
+  bundle exec rspec spec --format html --out rspec.html
+} || {
+  docker kill $(cat .es_container_id)
+  exit 1
+}
+
+docker kill $(cat .es_container_id)'''
             script {
               publishHTML(target: [
                 allowMissing: false,
