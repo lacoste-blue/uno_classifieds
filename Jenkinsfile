@@ -72,7 +72,7 @@ docker kill $(cat .es_container_id)'''
                   alwaysLinkToLastBuild: false,
                   keepAll: true,
                   reportDir: 'coverage',
-                  reportFiles: 'coverage/index.html',
+                  reportFiles: 'index.html',
                   reportTitles: "Coverage Report",
                   reportName: "Coverage Report"
                 ])
