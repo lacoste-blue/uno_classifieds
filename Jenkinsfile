@@ -87,7 +87,7 @@ docker kill $(cat .es_container_id)'''
 bundle install'''
               }
               
-              sh 'rubycritic --no-browser'
+              sh 'bundle exec rubycritic --no-browser'
               script {
                 publishHTML(target: [
                   allowMissing: false,
