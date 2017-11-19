@@ -1,93 +1,101 @@
 pipeline {
   agent any
   stages {
-    stage('Verify Lint') {
-      steps {
-        parallel(
-          "Verify Lint": {
+    stage('Verify') {
+      parallel {
+        stage('Lint') {
+          steps {
             sh 'echo "Hello world"'
             echo 'Hello World'
-            
-          },
-          "Verify Unit": {
-            echo 'Hi'
-            
-          },
-          "Verify Syntax": {
-            echo 'Hi'
-            
           }
-        )
+        }
+        stage('Unit') {
+          steps {
+            echo 'Hi'
+          }
+        }
+        stage('Syntax') {
+          steps {
+            echo 'Hi'
+          }
+        }
       }
     }
-    stage('Build Lint') {
-      steps {
-        parallel(
-          "Build Lint": {
+    stage('Build') {
+      parallel {
+        stage('Lint') {
+          steps {
             echo 'HI'
-            
-          },
-          "Build Unit": {
+          }
+        }
+        stage('Unit') {
+          steps {
             echo 'HI'
-            
-          },
-          "Build Syntax": {
+          }
+        }
+        stage('Syntax') {
+          steps {
             echo 'HI'
-            
-          },
-          "Build Quality": {
+          }
+        }
+        stage('Quality') {
+          steps {
             echo 'hi'
-            
-          },
-          "Build Publish": {
+          }
+        }
+        stage('Publish') {
+          steps {
             echo 'sdfg'
-            
           }
-        )
+        }
       }
     }
-    stage('Acceptance Provision') {
-      steps {
-        parallel(
-          "Acceptance Provision": {
+    stage('Acceptance') {
+      parallel {
+        stage('Provision') {
+          steps {
             echo 'hi'
-            
-          },
-          "Acceptance Deploy": {
-            echo 'hi'
-            
-          },
-          "Acceptance Smoke": {
-            echo 'hi'
-            
-          },
-          "Acceptance Functional": {
-            echo 'hi'
-            
           }
-        )
+        }
+        stage('Deploy') {
+          steps {
+            echo 'hi'
+          }
+        }
+        stage('Smoke') {
+          steps {
+            echo 'hi'
+          }
+        }
+        stage('Functional') {
+          steps {
+            echo 'hi'
+          }
+        }
       }
     }
-    stage('Delivered Provision') {
-      steps {
-        parallel(
-          "Delivered Provision": {
+    stage('Delivered') {
+      parallel {
+        stage('Provision') {
+          steps {
             echo 'hi'
-            
-          },
-          "Delivered Deploy": {
-            echo 'hi'
-            
-          },
-          "Delivered Smoke": {
-            echo 'hi'
-            
-          },
-          "Delivered Functional": {
-            echo 'hi'
-            
           }
-        )
+        }
+        stage('Deploy') {
+          steps {
+            echo 'hi'
+          }
+        }
+        stage('Smoke') {
+          steps {
+            echo 'hi'
+          }
+        }
+        stage('Functional') {
+          steps {
+            echo 'hi'
+          }
+        }
       }
     }
   }
