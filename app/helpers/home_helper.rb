@@ -2,7 +2,7 @@ module HomeHelper
 
   def recent_listings(limit)
     if Listing.has_picture.exists?
-      Listing.has_picture.last(limit+1)[1..-1]
+      Listing.has_picture.last(limit+1)[0...-1]
     else
       'No pictures'
     end
