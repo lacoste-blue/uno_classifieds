@@ -3,9 +3,15 @@ pipeline {
     node {
       label 'application'
     }
-    
+
   }
   stages {
+  stage('Prep') {
+    steps {
+      sh '''gem install bundler
+bundle install'''
+    }
+  }
     stage('Verify') {
       parallel {
         stage('Lint') {
@@ -14,7 +20,7 @@ pipeline {
               sh '''gem install bundler > /dev/null
 bundle install > /dev/null'''
             }
-            
+
             sh 'bundle exec rubocop --format html -o rubocop.html || true'
             script {
               publishHTML(target: [
@@ -27,7 +33,7 @@ bundle install > /dev/null'''
                 reportName: "Lint Report"
               ])
             }
-            
+
           }
         }
         stage('Syntax') {
@@ -42,7 +48,7 @@ bundle install > /dev/null'''
 bundle install
 '''
             }
-            
+
             catchError() {
               sh '''{
   docker run -dt -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.0.0 > .es_container_id
@@ -55,7 +61,7 @@ bundle install
 
 docker kill $(cat .es_container_id)'''
               }
-              
+
               script {
                 publishHTML(target: [
                   allowMissing: false,
@@ -66,7 +72,7 @@ docker kill $(cat .es_container_id)'''
                   reportTitles: "Unit Test Report",
                   reportName: "Unit Test Report"
                 ])
-                
+
                 publishHTML(target: [
                   allowMissing: false,
                   alwaysLinkToLastBuild: false,
@@ -77,7 +83,7 @@ docker kill $(cat .es_container_id)'''
                   reportName: "Coverage Report"
                 ])
               }
-              
+
             }
           }
           stage('Quality') {
@@ -86,7 +92,7 @@ docker kill $(cat .es_container_id)'''
                 sh '''gem install bundler
 bundle install'''
               }
-              
+
               sh 'bundle exec rubycritic --no-browser'
               script {
                 publishHTML(target: [
@@ -99,15 +105,9 @@ bundle install'''
                   reportName: "Quality Report"
                 ])
               }
-              
+
             }
           }
-        }
-      }
-      stage('Prep') {
-        steps {
-          sh '''gem install bundler
-bundle install'''
         }
       }
     }
