@@ -80,6 +80,28 @@ docker kill $(cat .es_container_id)'''
               
             }
           }
+          stage('Quality') {
+            steps {
+              retry(count: 2) {
+                sh '''gem install bundler
+bundle install'''
+              }
+              
+              sh 'bundle exec rubycritic --no-browser'
+              script {
+                publishHTML(target: [
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll: true,
+                  reportDir: 'tmp/rubycritic',
+                  reportFiles: 'overview.html',
+                  reportTitles: "Quality Report",
+                  reportName: "Quality Report"
+                ])
+              }
+              
+            }
+          }
         }
       }
     }
