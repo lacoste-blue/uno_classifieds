@@ -1,4 +1,4 @@
-module ListingsHelper
+  module ListingsHelper
 
   def link_tags(tags)
       raw tags.map{ |tag| link(tag.name)}.join(', ')
@@ -6,6 +6,10 @@ module ListingsHelper
 
   def link(tag)
     link_to tag, listings_path(tag: tag)
+  end
+
+  def email_body(listing)
+      msg = "Hi,\n\nI am interested in your listing titled #{listing.title} on UNO Classifieds.\n\n"
   end
 
   def index_welcome(params)
