@@ -1,9 +1,11 @@
 require 'elasticsearch/model'
+require 'set'
+
 class Listing < ApplicationRecord
-  belongs_to :category
-  belongs_to :user
+  belongs_to :category, optional: false
+  belongs_to :user, optional: false
   has_many :pictures, :dependent => :destroy
-  has_many :taggings
+  has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
 
   include Elasticsearch::Model
@@ -13,7 +15,7 @@ class Listing < ApplicationRecord
   scope :user_id, ->(user_id) { where(:user_id => user_id) }
   scope :has_picture, -> { includes(:pictures).where.not(:pictures => { :id => nil }) }
 
-  validates :category, :title, :presence => true
+  validates :title, :presence => true
 
   def all_tags=(names)
     self.tags = names.split(',').map do |name|
@@ -26,22 +28,27 @@ class Listing < ApplicationRecord
   end
 
   def self.tag(name)
-    listings = []
+    listings = Set.new
     logger.debug "In listing model: About to do a fuzzy match - on tag: #{name}"
     Tag.find_by_fuzzy_name(name).each do |tag|
-      listings += tag.listings
+      listings.merge(tag.listings)
     end
     listings
   end
 end
 
 # Delete the previous listings index in Elasticsearch
-Listing.__elasticsearch__.client.indices.delete index: Listing.index_name rescue nil
+begin
+  Listing.__elasticsearch__.client.indices.delete :index => Listing.index_name
+rescue
+  nil
+end
 
 # Create the new index with the new mapping
 Listing.__elasticsearch__.client.indices.create \
-  index: Listing.index_name,
-  body: { settings: Listing.settings.to_hash, mappings: Listing.mappings.to_hash }
+  :index => Listing.index_name,
+  :body => { :settings => Listing.settings.to_hash, :mappings => Listing.mappings.to_hash }
 
 # Index all listing records from the DB to Elasticsearch
 Listing.import
+
