@@ -3,15 +3,7 @@ require 'rails_helper'
 RSpec.describe 'listings/edit', type: :view do
   before(:each) do
     view.stub(:current_user) { FactoryBot.create(:admin) }
-    cat = FactoryBot.create(:category)
-    @listing = assign(:listing, Listing.create!(
-      :title => 'MyString',
-      :category => cat,
-      :user_id => 1,
-      :location => 'MyString',
-      :description => 'MyText',
-      :price => 1.5
-    ))
+    @listing = FactoryBot.create(:listing)
   end
 
   it 'renders the edit listing form' do
