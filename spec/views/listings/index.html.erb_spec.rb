@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'listings/index', type: :view do
+RSpec.describe 'listings/index', :type => :view do
   before(:each) do
     view.stub(:current_user) { FactoryBot.create(:admin) }
     FactoryBot.create(:category)
@@ -16,3 +16,4 @@ RSpec.describe 'listings/index', type: :view do
     # assert_select 'tr>td', :text => 2.5.to_s, :count => 2
   end
 end
+

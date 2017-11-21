@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe 'listings/new', type: :view do
+RSpec.describe 'listings/new', :type => :view do
   before(:each) do
     view.stub(:current_user) { FactoryBot.create(:admin) }
     cat = FactoryBot.create(:category)
     assign(:listing, Listing.new(
-      :title => 'MyString',
-      :category => cat,
-      :user_id => 1,
-      :location => 'MyString',
-      :description => 'MyText',
-      :price => 1.5
+                       :title => 'MyString',
+                       :category => cat,
+                       :user_id => 1,
+                       :location => 'MyString',
+                       :description => 'MyText',
+                       :price => 1.5
     ))
   end
 
@@ -18,9 +18,7 @@ RSpec.describe 'listings/new', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', listings_path, 'post' do
-
       assert_select 'input#listing_title[name=?]', 'listing[title]'
-
 
       assert_select 'input#listing_location[name=?]', 'listing[location]'
 
@@ -30,3 +28,4 @@ RSpec.describe 'listings/new', type: :view do
     end
   end
 end
+

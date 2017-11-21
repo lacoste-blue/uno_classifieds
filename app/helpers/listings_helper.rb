@@ -1,28 +1,27 @@
-  module ListingsHelper
-
+module ListingsHelper
   def link_tags(tags)
-      raw tags.map{ |tag| link(tag.name)}.join(', ')
+    raw tags.map { |tag| link(tag.name) }.join(', ')
   end
 
   def link(tag)
-    link_to tag, listings_path(tag: tag)
+    link_to tag, listings_path(:tag => tag)
   end
 
   def email_body(listing)
-      msg = "Hi,\n\nI am interested in your listing titled #{listing.title} on UNO Classifieds.\n\n"
+    "Hi,\n\nI am interested in your listing titled #{listing.title} on UNO Classifieds.\n\n"
   end
 
   def index_welcome(params)
     welcome = 'Listings %s %s %s'
     if params[:category_id]
-      welcome % ['in the ', Category.find(params[:category_id]).name.titleize, ' category']
+      format(welcome, 'in the ', Category.find(params[:category_id]).name.titleize, ' category')
     elsif params[:tag]
-      welcome % ['tagged with the ', params[:tag], ' tag']
+      format(welcome, 'tagged with the ', params[:tag], ' tag')
     elsif params[:user_id]
-      welcome % ['posted by ', User.find(params[:user_id]).name, '']
+      format(welcome, 'posted by ', User.find(params[:user_id]).name, '')
     else
       'All Listings'
     end
   end
-
 end
+

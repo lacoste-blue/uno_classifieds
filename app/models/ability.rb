@@ -9,9 +9,9 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-      can [:list, :grid], Listing
-      can [:create, :update, :destroy], Listing, user_id: user.id
-      can [:create, :update, :destroy], Category
+      can %i[list grid], Listing
+      can %i[create update destroy], Listing, :user_id => user.id
+      can %i[create update destroy], Category
     end
     #
     # The first argument to `can` is the action you are giving the user
@@ -33,3 +33,4 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 end
+

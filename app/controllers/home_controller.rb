@@ -11,15 +11,16 @@ class HomeController < ApplicationController
       @listings = Listing.all
     end
     ###
-
   end
 
   ###
+
   private
+
   def redirect_params(params)
-  #params.permit(:category_id, :user_id, :tag, :search)
+    # params.permit(:category_id, :user_id, :tag, :search)
     params.permit(:search)
   end
   ###
-
 end
+
