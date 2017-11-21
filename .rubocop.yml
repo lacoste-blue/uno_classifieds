@@ -28,6 +28,9 @@ Lint/AssignmentInCondition:
 Metrics/MethodLength:
   Max: 20
 
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
+
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*'
