@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'pictures/edit', type: :view do
+RSpec.describe 'pictures/edit', :type => :view do
   before(:each) do
     @picture = assign(:picture, Picture.create!)
   end
@@ -12,3 +12,4 @@ RSpec.describe 'pictures/edit', type: :view do
     end
   end
 end
+

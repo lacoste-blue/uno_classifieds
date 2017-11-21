@@ -2,8 +2,8 @@ require 'elasticsearch/model'
 require 'set'
 
 class Listing < ApplicationRecord
-  belongs_to :category, optional: false
-  belongs_to :user, optional: false
+  belongs_to :category, :optional => false
+  belongs_to :user, :optional => false
   has_many :pictures, :dependent => :destroy
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings

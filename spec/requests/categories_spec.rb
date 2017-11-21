@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Categories', type: :request do
+RSpec.describe 'Categories', :type => :request do
   describe 'GET /categories' do
     it 'works! (now write some real specs)' do
       sign_in FactoryBot.create(:admin)
@@ -9,3 +9,4 @@ RSpec.describe 'Categories', type: :request do
     end
   end
 end
+

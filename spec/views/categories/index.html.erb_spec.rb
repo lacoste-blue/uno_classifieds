@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'categories/index', type: :view do
+RSpec.describe 'categories/index', :type => :view do
   before(:each) do
     assign(:categories, [
-      Category.create!(
-        :name => 'Name',
-        :description => 'Description'
-      ),
-      Category.create!(
-        :name => 'Name',
-        :description => 'Description'
-      )
-    ])
+             Category.create!(
+               :name => 'Name',
+               :description => 'Description'
+             ),
+             Category.create!(
+               :name => 'Name',
+               :description => 'Description'
+             )
+           ])
   end
 
   it 'renders a list of categories' do
@@ -20,3 +20,4 @@ RSpec.describe 'categories/index', type: :view do
     assert_select 'tr>td', :text => 'Description'.to_s, :count => 2
   end
 end
+

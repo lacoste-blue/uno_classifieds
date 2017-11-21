@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'categories/show', type: :view do
+RSpec.describe 'categories/show', :type => :view do
   before(:each) do
     @category = assign(:category, Category.create!(
-      :name => 'Name',
-      :description => 'Description'
+                                    :name => 'Name',
+                                    :description => 'Description'
     ))
   end
 
@@ -14,3 +14,4 @@ RSpec.describe 'categories/show', type: :view do
     expect(rendered).to match(/Description/)
   end
 end
+

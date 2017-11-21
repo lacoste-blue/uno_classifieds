@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, :only => %i[show edit update destroy]
   respond_to :html, :json
   load_and_authorize_resource
 
@@ -12,8 +12,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   # GET /categories/1.json
-  def show
-  end
+  def show; end
 
   # GET /categories/new
   def new
@@ -22,8 +21,7 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /categories
   # POST /categories.json
@@ -43,17 +41,19 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    redirect_back fallback_location: categories_path, alert: 'Category was successfully destroyed.' if @category.destroy
+    redirect_back :fallback_location => categories_path, :alert => 'Category was successfully destroyed.' if @category.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def category_params
-      params.require(:category).permit(:name, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def category_params
+    params.require(:category).permit(:name, :description)
+  end
 end
+

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Pictures', type: :request do
+RSpec.describe 'Pictures', :type => :request do
   describe 'GET /pictures' do
     it 'works! (now write some real specs)' do
       skip('Need to fix this')
@@ -10,3 +10,4 @@ RSpec.describe 'Pictures', type: :request do
     end
   end
 end
+
