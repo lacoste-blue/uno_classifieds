@@ -105,7 +105,6 @@ RSpec.describe CategoriesController, :type => :controller do
 
       it 'redirects to new' do
         post :create, :params => { :category => invalid_attributes }, :session => valid_session
-        puts response.inspect
         expect(response).to render_template :new
       end
     end
