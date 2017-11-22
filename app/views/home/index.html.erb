@@ -39,7 +39,7 @@
             <%= last_picture %>
           </div>
 
-            <% Listing.has_picture[1...-1].each do |listing| %>
+            <% Listing.has_picture[1...-1].try(:each) do |listing| %>
               <div class="item">
                  <%= link_to image_tag(listing.pictures.first.image.url(:large)),
                             listing_path(listing), target: '_blank', :class => 'd-block img-fluid' %>
