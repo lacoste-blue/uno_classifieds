@@ -67,7 +67,17 @@
     font-size: 150%;
     color: white !important;
  }
+
 .carousel-inner > .item > a > img
 {
   max-width: none !important;
+}
+
+.modal-content{
+  max-width: 500px !important;
+}
+
+.close {
+  float: right;
+  font-size: 2.5rem !important;
 }
