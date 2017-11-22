@@ -27,10 +27,10 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1
   # DELETE /pictures/1.json
   def destroy
-    #@listing = Listing.find(params[:listing_id])
-    #@picture = @listing.pictures.find(params[:id])
+    # @listing = Listing.find(params[:listing_id])
+    # @picture = @listing.pictures.find(params[:id])
     @picture = Picture.find(params[:id])
-    redirect_back fallback_location: listing_path if @picture.destroy
+    redirect_back :fallback_location => listing_path if @picture.destroy
   end
 
   private
@@ -39,3 +39,4 @@ class PicturesController < ApplicationController
     params.require(:picture).permit(:listing_id, :image)
   end
 end
+
