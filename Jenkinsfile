@@ -68,6 +68,16 @@ docker kill $(cat .es_container_id)'''
                   reportTitles: "Coverage Report",
                   reportName: "Coverage Report"
                 ])
+                
+                publishHTML(target: [
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll: true,
+                  reportDir: 'rspec_html_reports',
+                  reportFiles: 'overview.html',
+                  reportTitles: "New Unit Test Report",
+                  reportName: "New Unit Test Report"
+                ])
               }
               
             }
@@ -117,7 +127,7 @@ aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-
       }
       stage('Acceptance - Test') {
         steps {
-          sh '/opt/Katalon_Studio-4.8/katalon runMode=console -projectPath="$WORKSPACE" -reportFolder="Reports" -reportFileName="report" -retry=0 -testSuitePath="$WORKSPACE"/acceptance -browserType="Chrome"'
+          sh '/opt/Katalon_Studio-4.8/katalon runMode=console -projectPath="$WORKSPACE" -reportFolder="Reports" -reportFileName="report" -retry=0 -testSuitePath="$WORKSPACE"/acceptance -browserType="Chrome" |'
         }
       }
       stage('Production') {
