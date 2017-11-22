@@ -38,19 +38,16 @@ bundle install'''
         }
         stage('Unit') {
           steps {
-            catchError() {
-              sh '''{
+            sh '''{
   docker run -dt -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.0.0 > .es_container_id
   sleep 30;
-  bundle exec rspec spec --format html --out rspec.html
+  bundle exec rspec spec --format html --out rspec.html || true
 } || {
   docker kill $(cat .es_container_id)
   exit 1
 }
 
 docker kill $(cat .es_container_id)'''
-              }
-              
               script {
                 publishHTML(target: [
                   allowMissing: false,
@@ -114,6 +111,35 @@ sleep 15
 
 # Check if environment is green.
 aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-acceptance" --region us-east-1 | grep "Health" | cut -d\':\' -f2 | cut -d\'"\' -f2 | grep \'Green\''''
+            }
+          }
+        }
+      }
+      stage('Acceptance - Test') {
+        steps {
+          sh '/opt/Katalon_Studio-4.8/katalon runMode=console -projectPath="$WORKSPACE" -reportFolder="Reports" -reportFileName="report" -retry=0 -testSuitePath="$WORKSPACE"/acceptance -browserType="Chrome"'
+        }
+      }
+      stage('Production') {
+        parallel {
+          stage('Deploy') {
+            steps {
+              sh 'eb deploy uno-classifieds-prod'
+            }
+          }
+          stage('Check deploy') {
+            steps {
+              sh '''# Give the API some time to update
+sleep 15
+while [ -n "$(aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-prod" --region us-east-1 | grep \'Updating\')" ]; do
+  sleep 15
+  echo "The environment is not yet ready..."
+done
+
+sleep 15
+
+# Check if environment is green.
+aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-prod" --region us-east-1 | grep "Health" | cut -d\':\' -f2 | cut -d\'"\' -f2 | grep \'Green\''''
             }
           }
         }
