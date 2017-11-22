@@ -1,1 +1,2 @@
-json.partial! 'pictures/picture', picture: @picture
+json.partial! 'pictures/picture', :picture => @picture
+

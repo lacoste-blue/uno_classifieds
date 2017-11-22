@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'categories/edit', type: :view do
+RSpec.describe 'categories/edit', :type => :view do
   before(:each) do
     @category = assign(:category, Category.create!(
-      :name => 'MyString',
-      :description => 'MyString'
+                                    :name => 'MyString',
+                                    :description => 'MyString'
     ))
   end
 
@@ -12,10 +12,10 @@ RSpec.describe 'categories/edit', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', category_path(@category), 'post' do
-
       assert_select 'input#category_name[name=?]', 'category[name]'
 
       assert_select 'input#category_description[name=?]', 'category[description]'
     end
   end
 end
+
