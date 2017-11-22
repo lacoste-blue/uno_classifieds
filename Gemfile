@@ -67,6 +67,7 @@ gem 'paperclip'
 gem 'pg'
 gem 'rubocop'
 gem 'rubycritic'
-gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
 gem 'seed_dump'
+gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
+
 
