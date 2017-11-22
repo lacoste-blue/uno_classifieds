@@ -38,11 +38,10 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', :platform => :mri
-  gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.6'
+  gem 'rspec_html_formatter', '~> 0.3.1'
   gem 'simplecov'
-  gem 'rspec_html_formatter','~> 0.3.1'
 end
 
 group :development do
@@ -55,7 +54,6 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'listen', '~> 3.0.5'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'cancancan', '~> 2.0'
 gem 'devise'
@@ -64,14 +62,16 @@ gem 'elasticsearch-rails'
 gem 'factory_bot_rails'
 gem 'faker'
 gem 'fuzzily'
+gem 'listen', '~> 3.0.5'
 gem 'money-rails'
 gem 'paperclip'
 gem 'pg'
 gem 'rubocop'
 gem 'rubycritic'
-gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
 gem 'seed_dump'
+gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
 
-gem "rubycritic"
-gem 'rails-controller-testing'
 gem 'aws-sdk', '~> 2.3.0'
+gem 'database_cleaner'
+gem "rubycritic"
+
