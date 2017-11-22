@@ -41,7 +41,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
-  gem 'rspec_html_formatter','~> 0.3.1'
 end
 
 group :test do
