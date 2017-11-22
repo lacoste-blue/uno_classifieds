@@ -41,7 +41,7 @@ bundle install'''
             sh '''{
   docker run -dt -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.0.0 > .es_container_id
   sleep 30;
-  bundle exec rspec || true
+  bundle exec rspec
 } || {
   docker kill $(cat .es_container_id)
   exit 1
@@ -127,8 +127,7 @@ aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-
       }
       stage('Acceptance - Test') {
         steps {
-          sh '''export DISPLAY=:0
-/opt/Katalon_Studio-4.8/katalon runMode=console -projectPath="$WORKSPACE" -reportFolder="Reports" -reportFileName="report" -retry=0 -testSuitePath="$WORKSPACE"/acceptance -browserType="Chrome"'''
+          sh '/opt/Katalon_Studio-4.8/katalon runMode=console -consoleLog -reportFolder="Reports" -reportFileName="report" -retry=0 -testSuitePath="Test Cases/Sign in" -projectPath="$WORKSPACE"/acceptance/UNO.prj -browserType="Chrome"'
         }
       }
       stage('Production') {
