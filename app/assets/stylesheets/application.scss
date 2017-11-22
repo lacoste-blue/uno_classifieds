@@ -65,3 +65,7 @@
     font-size: 150%;
     color: white !important;
  }
+.carousel-inner > .item > a > img
+{
+  max-width: none !important;
+}
