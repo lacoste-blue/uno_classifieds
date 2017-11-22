@@ -38,9 +38,9 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', :platform => :mri
+  gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.6'
-  gem 'rspec_html_formatter', '~> 0.3.1'
   gem 'simplecov'
 end
 
@@ -62,16 +62,11 @@ gem 'elasticsearch-rails'
 gem 'factory_bot_rails'
 gem 'faker'
 gem 'fuzzily'
-gem 'listen', '~> 3.0.5'
 gem 'money-rails'
 gem 'paperclip'
 gem 'pg'
 gem 'rubocop'
 gem 'rubycritic'
-gem 'seed_dump'
 gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
-
-gem 'aws-sdk', '~> 2.3.0'
-gem 'database_cleaner'
-gem "rubycritic"
+gem 'seed_dump'
 
