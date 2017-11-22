@@ -55,6 +55,7 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'listen', '~> 3.0.5'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'cancancan', '~> 2.0'
 gem 'devise'
