@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
+  gem 'rspec_html_formatter','~> 0.3.1'
 end
 
 group :development do
@@ -69,4 +70,3 @@ gem 'factory_bot_rails'
 gem 'faker'
 gem "rubycritic"
 gem 'aws-sdk', '~> 2.3.0'
-gem 'rspec_html_formatter','~> 0.3.1'
