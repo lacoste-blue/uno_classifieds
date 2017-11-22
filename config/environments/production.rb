@@ -85,8 +85,12 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.paperclip_defaults = {
-    :storage => :s3,
-    :preserve_files => true,
-    :bucket => 'unoc-prod-pictures'
+    storage: :s3,
+    s3_credentials: {
+      bucket: 'unoc-prod-pictures',
+      access_key_id: ENV.fetch('PIC_BUCKET_KEY_ID'),
+      secret_access_key: ENV.fetch('PIC_BUCKET_KEY'),
+      s3_region: 'us-east-1',
+    }
   }
 end

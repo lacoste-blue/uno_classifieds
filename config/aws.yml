@@ -1,3 +1,0 @@
-production:
-  access_key_id: <%= ENV['PIC_BUCKET_KEY_ID'] %>
-  secret_access_key: <%= ENV['PIC_BUCKET_KEY'] %>
