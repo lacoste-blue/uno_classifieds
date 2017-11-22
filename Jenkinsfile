@@ -94,5 +94,29 @@ docker kill $(cat .es_container_id)'''
           }
         }
       }
+      stage('Acceptance - Provision') {
+        parallel {
+          stage('Deploy') {
+            steps {
+              sh 'eb deploy uno-classifieds-acceptance'
+            }
+          }
+          stage('Check deploy') {
+            steps {
+              sh '''# Give the API some time to update
+sleep 15
+while [ -n "$(aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-acceptance" --region us-east-1 | grep \'Updating\')" ]; do
+  sleep 15
+  echo "The environment is not yet ready..."
+done
+
+sleep 15
+
+# Check if environment is green.
+aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-acceptance" --region us-east-1 | grep "Health" | cut -d\':\' -f2 | cut -d\'"\' -f2 | grep \'Green\''''
+            }
+          }
+        }
+      }
     }
   }
