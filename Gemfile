@@ -44,6 +44,10 @@ group :development, :test do
   gem 'rspec_html_formatter','~> 0.3.1'
 end
 
+group :test do
+  gem 'rspec_html_formatter','~> 0.3.1'
+end
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
