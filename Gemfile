@@ -69,3 +69,4 @@ gem 'factory_bot_rails'
 gem 'faker'
 gem "rubycritic"
 gem 'aws-sdk', '~> 2.3.0'
+gem 'rspec_html_formatter','~> 0.3.1'
