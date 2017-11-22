@@ -68,3 +68,4 @@ gem 'pg'
 gem 'factory_bot_rails'
 gem 'faker'
 gem "rubycritic"
+gem 'aws-sdk', '~> 2.3.0'
