@@ -73,4 +73,4 @@ gem 'rubocop'
 gem 'rubycritic'
 gem 'seed_dump'
 gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
-gem 'aws-sdk', '~> 3'
+gem 'aws-sdk', '~> 2.3.0'
