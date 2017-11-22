@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys as Keys
 
 WebUI.openBrowser('')
 
-WebUI.navigateToUrl('http://localhost:3000/users/sign_in')
+WebUI.navigateToUrl('http://unoc-acc.lacoste.blue/users/sign_in')
 
 WebUI.setText(findTestObject('Page_UnoClassifieds/input_useremail'), 'testuser91@uno.edu')
 
@@ -53,4 +53,3 @@ WebUI.click(findTestObject('Page_UnoClassifieds/span_glyphicon glyphicon glyph_1
 WebUI.clickOffset(findTestObject('Page_UnoClassifieds/a_Create New'), 0, 0)
 
 WebUI.closeBrowser()
-
