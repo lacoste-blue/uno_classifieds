@@ -31,15 +31,6 @@ class Listing < ApplicationRecord
   def all_tags
     tags.map(&:name).join(', ')
   end
-
-  # def self.tag(name)
-  #   listings = Set.new
-  #   logger.debug "In listing model: About to do a fuzzy match - on tag: #{name}"
-  #   Tag.find_by_fuzzy_name(name).each do |tag|
-  #     listings.merge(tag.listings)
-  #   end
-  #   listings.to_a
-  # end
 end
 
 # Delete the previous listings index in Elasticsearch
