@@ -14,6 +14,11 @@ class Listing < ApplicationRecord
   scope :category_id, ->(category_id) { where(:category_id => category_id) }
   scope :user_id, ->(user_id) { where(:user_id => user_id) }
   scope :has_picture, -> { includes(:pictures).where.not(:pictures => { :id => nil }) }
+  scope :search, ->(q) { where(:id => Listing.__elasticsearch__.search(q).map(&:_id)) }
+  scope :tag, lambda { |tag|
+    logger.debug "In listing model: About to do a fuzzy match - on tag: #{name}"
+    where(:id => Tagging.where(:tag_id => Tag.find_by_fuzzy_name(tag).map(&:id)).map(&:listing_id))
+  }
 
   validates :title, :presence => true
 
@@ -26,21 +31,12 @@ class Listing < ApplicationRecord
   def all_tags
     tags.map(&:name).join(', ')
   end
-
-  def self.tag(name)
-    listings = Set.new
-    logger.debug "In listing model: About to do a fuzzy match - on tag: #{name}"
-    Tag.find_by_fuzzy_name(name).each do |tag|
-      listings.merge(tag.listings)
-    end
-    listings
-  end
 end
 
 # Delete the previous listings index in Elasticsearch
 begin
   Listing.__elasticsearch__.client.indices.delete :index => Listing.index_name
-rescue
+rescue StandardError
   nil
 end
 
