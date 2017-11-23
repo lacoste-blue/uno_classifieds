@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'listings/edit', :type => :view do
   before(:each) do
-    view.stub(:current_user) { FactoryBot.create(:admin) }
+    allow(view).to receive(:current_user).and_return(FactoryBot.create(:admin))
     @listing = FactoryBot.create(:listing)
   end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'listings/new', :type => :view do
   before(:each) do
-    view.stub(:current_user) { FactoryBot.create(:admin) }
+    allow(view).to receive(:current_user).and_return(FactoryBot.create(:admin))
     cat = FactoryBot.create(:category)
     assign(:listing, Listing.new(
                        :title => 'MyString',
