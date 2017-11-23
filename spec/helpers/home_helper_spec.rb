@@ -41,7 +41,6 @@ RSpec.describe HomeHelper, :type => :helper do
   end
 
   describe 'last_picture' do
-
     it 'returns No pictures when no listings' do
       expect(last_picture).to eq('No pictures')
     end
@@ -50,7 +49,6 @@ RSpec.describe HomeHelper, :type => :helper do
       FactoryBot.create(:listing)
       expect(last_picture).to eq('No pictures')
     end
-
 
     it 'should return the last listing with picture' do
       FactoryBot.create(:listing)

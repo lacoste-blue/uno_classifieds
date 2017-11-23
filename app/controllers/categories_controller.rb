@@ -41,7 +41,8 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    redirect_back :fallback_location => categories_path, :alert => 'Category was successfully destroyed.' if @category.destroy
+    return unless @category.destroy
+    redirect_back :fallback_location => categories_path, :alert => 'Category was successfully destroyed.'
   end
 
   private

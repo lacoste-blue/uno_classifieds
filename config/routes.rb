@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :listings
   resources :categories
   resources :pictures
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { :registrations => 'registrations' }
 
   get 'home/index'
 
@@ -13,3 +13,4 @@ Rails.application.routes.draw do
   # Sets landing page:
   root 'home#index'
 end
+

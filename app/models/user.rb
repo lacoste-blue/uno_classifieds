@@ -9,9 +9,7 @@ class User < ApplicationRecord
 
   def email_domain
     domain = email.split('@').last
-    unless email.blank?
-      errors.add(:email, 'Invalid Domain') if domain != 'uno.edu'
-    end
+    errors.add(:email, 'Invalid Domain') if domain != 'uno.edu' && email.present?
   end
 
   def set_to_grid_view

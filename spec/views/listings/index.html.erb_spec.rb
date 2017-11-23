@@ -13,7 +13,6 @@ RSpec.describe 'listings/index', :type => :view do
     end
   end
 
-
   it 'renders a list of listings' do
     controller.extend(StubControllerMethod)
     render

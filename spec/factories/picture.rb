@@ -8,3 +8,4 @@ FactoryBot.define do
     image File.new(Rails.root.join('app', 'assets', 'images', 'uno_logo.png'))
   end
 end
+
