@@ -45,7 +45,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec_html_formatter','~> 0.3.1'
+  gem 'rspec-core'
+  gem 'rspec_html_formatter', '~> 0.3.1'
 end
 
 group :development do
@@ -58,6 +59,7 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'aws-sdk', '~> 2.3.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'cancancan', '~> 2.0'
 gem 'devise'
@@ -73,4 +75,4 @@ gem 'rubocop'
 gem 'rubycritic'
 gem 'seed_dump'
 gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
-gem 'aws-sdk', '~> 2.3.0'
+
