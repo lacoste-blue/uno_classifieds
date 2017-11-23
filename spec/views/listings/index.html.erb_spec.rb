@@ -8,7 +8,7 @@ RSpec.describe 'listings/index', :type => :view do
   end
 
   module StubControllerMethod
-    def redirect_params(params)
+    def redirect_params(_params)
       {}
     end
   end
