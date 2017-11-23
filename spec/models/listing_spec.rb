@@ -85,8 +85,8 @@ RSpec.describe Listing, :type => :model do
   end
 
   describe '.tag' do
-    it 'returns a set of listings' do
-      expect(Listing.tag('')).to be_a(Set)
+    it 'returns a scope(ActiveRecord_Relation' do
+      expect(Listing.tag('')).to be_a(Listing::ActiveRecord_Relation)
     end
 
     context 'when retrieving apple tag' do
