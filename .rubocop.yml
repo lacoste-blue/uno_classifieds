@@ -29,12 +29,12 @@ Metrics/MethodLength:
   Max: 20
 
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context']
+  ExcludedMethods: ['describe', 'context', 'configure']
 
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*'
 AllCops:
   Exclude:
-    - 'db/schema.rb'
+    - 'db/**/*'
 
