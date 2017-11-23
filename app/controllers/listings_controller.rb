@@ -8,23 +8,13 @@ class ListingsController < ApplicationController
   # GET /listings.json
   def index
     ###
+    @listings = Listing.where(nil)
     logger.debug "In listing controller index - at top - params: #{params}"
-    if params[:search]
-      @listings = []
-      (Listing.search params[:search]).each do |listing|
-        @listings += Listing.where(:id => [listing._id]).to_a
-      end
-      logger.debug "In listing controller index - at after if params search - @listings: #{@listings}"
-    else
-
-      redirect_params(params).each do |key, value|
-        {
-          @listings = @listings.public_send(key, value) => value
-        }
-      end
-
-      respond_with(@listings)
-    end ###
+    redirect_params(params).each do |key, value|
+      @listings = @listings.public_send(key, value) if value.present?
+    end
+    logger.debug "In Listing controller index, returning listings:  #{@listings.inspect}"
+    respond_with(@listings)
   end
 
   # GET /listings/1
@@ -42,10 +32,6 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    puts 'listing params:'
-    puts listing_params.inspect
-    puts 'params:'
-    puts params.inspect
     @listing = Listing.new(listing_params)
     if @listing.save
       create_images if params[:images]
@@ -105,7 +91,8 @@ class ListingsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def listing_params
-    params.require(:listing).permit(:title, :search, :tag, :category_id, :user_id, :pictures, :all_tags, :location, :description, :price)
+    params.require(:listing).permit(:title, :search, :tag, :category_id, :user_id, :pictures, :all_tags,
+                                    :location, :description, :price)
   end
 
   def redirect_params(params)
