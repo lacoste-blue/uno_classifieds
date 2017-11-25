@@ -41,6 +41,7 @@
 			    <br>
 
 		      <button id="myBtn" type="button" class="btn btn-primary btn-lg">Contact Seller</button>
+          <button id="myBtn2" type="button" class="btn btn-primary btn-lg">View Location</button>
         </div>
 
       </div>
@@ -96,6 +97,54 @@
         </div>
 
       </div>
+
+      <div id="myModal2" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1>Item Location</h1>
+            <span class="close2">&times;</span>
+            <h2></h2>
+          </div>
+          <div class="modal-body">
+            <%= image_tag google_map(center: @listing.location) %>
+          </div>
+          <div class="modal-footer">
+            <h3></h3>
+          </div>
+
+          <script>
+          // Get the modal
+          var modal2 = document.getElementById('myModal2');
+
+          // Get the button that opens the modal
+          var btn2 = document.getElementById("myBtn2");
+
+          // Get the <span> element that closes the modal
+          var span2 = document.getElementsByClassName("close2")[0];
+
+          // When the user clicks the button, open the modal
+          btn2.onclick = function() {
+              modal2.style.display = "block";
+          };
+
+          // When the user clicks on <span> (x), close the modal
+          span2.onclick = function() {
+              modal2.style.display = "none";
+          };
+
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal2.style.display = "none";
+              }
+          }
+          </script>
+        </div>
+
+      </div>
+
       <!-- Related Projects Row -->
       <h3 class="my-4">More Images</h3>
 
@@ -110,7 +159,6 @@
 
     </div>
     <!-- /.container -->
-
   </body>
 
 </html>
