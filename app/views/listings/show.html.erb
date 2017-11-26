@@ -51,9 +51,9 @@
           <% if can? :update, @listing %>
             <div class="col-md-10" style="padding-top: 5px; padding-left: 0px">
               <div class="btn-toolbar" style="padding-right: 5px">
-
-                  <%= link_to 'Edit', edit_listing_path(@listing), class: 'btn btn-primary btn-lg' %>
-                <%= link_to 'Delete', @listing, :method => :delete, class: 'btn btn-primary btn-lg',
+                  
+                  <%= link_to 'Edit', edit_listing_path(@listing), class: 'btn btn-success btn-lg' %>
+                <%= link_to 'Delete', @listing, :method => :delete, class: 'btn btn-success btn-lg',
                                 data: { confirm: "Delete listing:  #{@listing.title}?"} %>
             </div>
             </div>

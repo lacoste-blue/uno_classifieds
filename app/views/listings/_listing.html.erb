@@ -21,6 +21,12 @@
         <!-- <%= link_to "See more by tags: #{listing.all_tags}", listings_path(category_id: listing.category_id) %> -->
         <%= link_tags(listing.tags) %>
         <% end %>
+        <% if can? :update, listing %>
+            <br>
+            <%= link_to 'Edit', edit_listing_path(listing), class: 'btn btn-success' %>
+            <%= link_to 'Delete', listing, :method => :delete, class: 'btn btn-success',
+                            data: { confirm: "Delete listing:  #{listing.title}?"} %>
+        <% end %>
       </p>
     </div>
   </div>
