@@ -54,7 +54,7 @@ class ListingsController < ApplicationController
   # DELETE /listings/1
   # DELETE /listings/1.json
   def destroy
-    redirect_back :fallback_location => listing_path, :alert => 'Successfully deleted listing' if @listing.destroy
+    redirect_to listings_path, :alert => 'Successfully deleted listing' if @listing.destroy
   end
 
   def grid
