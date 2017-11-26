@@ -134,7 +134,15 @@ aws elasticbeanstalk describe-environments --environment-names "uno-classifieds-
         parallel {
           stage('Deploy') {
             steps {
-              sh 'eb deploy uno-classifieds-prod'
+              sh '''case $BRANCH_NAME in
+master)
+eb deploy uno-classifieds-prod
+;;
+*)
+echo "I won\'t deploy any branch but master!"
+;;
+esac
+'''
             }
           }
           stage('Check deploy') {
