@@ -118,7 +118,7 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
+                <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<%= current_user.name %>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <%= link_to('My Account', edit_user_registration_path, class: 'dropdown-item') %>
