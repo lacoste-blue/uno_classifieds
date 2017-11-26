@@ -41,27 +41,26 @@
             <div>
               <form>
                 <div class="form-group col-xs-12">
-                  <label for="sel1">Category</label>
+                  <label for="category_id">Category</label>
                   <select class="form-control" id="sel1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                    <option></option>
+                    <% Category.all.each do |c| %>
+                    <option><%= c.name %></option>
+                    <% end %>
                   </select>
                   <br>
-                  <label for="sel2">Tags</label>
-                  <select class="form-control" id="sel1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
+                  <label for="tag">Tags</label>
+                  <input type="text" class="form-control" placeholder="Search by tag">
                   <br>
-                  <label for="sel3">Name</label>
-                  <input type="text" class="form-control" placeholder="Last name">
+                  <label for="user_id">User</label>
+                  <select class="form-control">
+                  <% User.all.each do |u| %>
+                  <option><%= u.name %> </option>
+                  <% end %>
+                </select>
                   <br>
-                  <label for="sel4">Others</label>
-                  <input type="text" class="form-control" placeholder="Last name">
+                  <label for="search">Description</label>
+                  <input type="text" class="form-control" placeholder="Search by title/description">
                 </div>
               </form>
             </div>
