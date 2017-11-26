@@ -17,20 +17,30 @@ RSpec.shared_examples 'indexes resource' do |resource, resource_class|
   end
 end
 
-RSpec.shared_examples 'destroy resource' do |resource_class|
+RSpec.shared_examples 'destroy resource' do |resource_class, redirect, status|
   it 'destroys the requested resource' do
     resource = resource_from_controller(subject)
     expect do
       delete :destroy, :params => { :id => resource.to_param }, :session => {}
     end.to change(resource_class, :count).by(-1)
   end
+
+  it "redirects to #{resource_class}" do
+    resource = resource_from_controller(subject)
+    redirect ||= resource_class
+    status ||= 302
+    request.env['HTTP_REFERER'] = resource_class
+    delete :destroy, :params => { :id => resource.to_param }, :session => {}
+    expect(response).to redirect_to(redirect)
+    expect(response.status).to be(status)
+  end
 end
 
 RSpec.shared_examples 'updatable resource' do |resource_type, new_attr|
-  before {
+  before do
     @resource = resource_from_controller(subject)
-    @new_params = { :id => @resource.id, resource_type => new_attr }
-  }
+    @new_params = {:id => @resource.id, resource_type => new_attr}
+  end
 
   it 'updates the resource' do
     put :update, :params => @new_params

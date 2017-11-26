@@ -104,32 +104,23 @@ RSpec.describe CategoriesController, :type => :controller do
 
       it_behaves_like 'updatable resource', :category, new_attr
 
-      it 'redirects' do
-        expect(true).to eq(true)
-      end
     end
 
     context 'with invalid params' do
       before do
-        @category = FactoryBot.create(:category)
-        put :update, :params => { :id => @category.id, :category => invalid_attributes }
+        category = FactoryBot.create(:category)
+        put :update, :params => { :id => category.id, :category => invalid_attributes }
       end
 
-      include_examples 'a success response', :edit
+      it_behaves_like 'a success response', :edit
 
-      it 'redirects to edit' do
-        expect(response).to render_template :edit
-      end
     end
   end
 
   describe 'DELETE #destroy' do
     include_examples 'destroy resource', Category
-    it 'redirects to the categories list' do
-      category = Category.create! valid_attributes
-      delete :destroy, :params => { :id => category.to_param }, :session => valid_session
-      expect(response).to redirect_to(categories_url)
-    end
   end
 end
+
+
 

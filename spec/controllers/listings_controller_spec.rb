@@ -70,9 +70,9 @@ RSpec.describe ListingsController, :type => :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Listing' do
-        expect {
-          post :create, :params => { :listing => valid_attributes }, :session => valid_session
-        }.to change(Listing, :count).by(1)
+        expect do
+          post :create, :params => {:listing => valid_attributes}, :session => valid_session
+        end.to change(Listing, :count).by(1)
       end
 
       it 'redirects to the created listing' do
@@ -91,9 +91,9 @@ RSpec.describe ListingsController, :type => :controller do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      let(:new_attributes) {
-        { :title => 'new title' }
-      }
+      let(:new_attributes) do
+        {:title => 'new title'}
+      end
 
       it 'updates the requested listing' do
         listing = FactoryBot.create(:listing)
@@ -120,18 +120,6 @@ RSpec.describe ListingsController, :type => :controller do
 
   describe 'DELETE #destroy' do
     include_examples 'destroy resource', Listing
-    before do
-      @listing = FactoryBot.create(:listing, :user => subject.current_user)
-      delete :destroy, :params => { :id => @listing.to_param }, :session => valid_session
-    end
-
-    it 'redirects to the listing' do
-      expect(response).to redirect_to "/listings/#{@listing.id}"
-    end
-
-    it 'returns 302 status' do
-      expect(response.status).to be(302)
-    end
   end
 end
 
