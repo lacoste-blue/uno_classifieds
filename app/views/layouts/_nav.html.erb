@@ -8,26 +8,25 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse nav-collapse-align" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="navbarResponsive">
 
     <% logger.debug "In nav view - current_name: #{controller_name}" %>
     <% logger.debug "In nav view - action_name: #{action_name}" %>
-    <% if controller_name != 'registrations' && (controller_name != 'listings' || action_name != 'show') %>
-      <ul class="nav-item">
+      <% if user_signed_in? && (action_name != 'new') %>
+        <ul class="nav-item">
+          <%= form_tag listings_path, method: :get, :class => 'form-inline my-2 my-lg-0 mr-lg-2' do |_| %>
+              <div class="input-group">
 
-        <%= form_for listings_path, method: :get, :html => {:class => 'form-inline my-2 my-lg-0 mr-lg-2'} do |_| %>
-            <div class="input-group">
-
-            <%= text_field_tag :search, params[:search], class: 'form-control search-bar', placeholder: 'Search By Title, Tags ...' %>
-            <%= button_tag type: 'submit' , class: 'btn btn-primary search-btn' do  %>
-                <i class="glyphicon glyphicon glyphicon-search"></i>
-                <% end %>
-            </div>
-        <% end %>
-        <div class="input-group advance-search-space">
+              <%= text_field_tag :search, params[:search], class: 'form-control search-bar' %>
+              <%= button_tag type: 'submit' , class: 'btn btn-primary search-btn' do  %>
+                  <i class="glyphicon glyphicon glyphicon-search"></i>
+                  <% end %>
+              </div>
+          <% end %>
+            <div class="input-group advance-search-space">
         <button id="searchBtn" type="button" class="btn btn-primary btn-lg advance-search">Advance Search</button>
         </div>
-      </ul>
+        </ul>
     <% end %>
       <div id="advanceSearch" class="modal">
 
