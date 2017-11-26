@@ -13,7 +13,7 @@
       <h5><%= humanized_money_with_symbol listing.price %> </h5>
       <p class="card-text"><%= listing.description %></p>
       <p class="card-text">
-        See more in: 
+        See more in category: 
         <%= link_to "#{listing.category.name.titleize}", listings_path(category_id: listing.category_id) %>
         <br> See more by poster:
         <%= link_to listing.user.name, listings_path(user_id: listing.user.id) %>
