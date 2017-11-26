@@ -103,7 +103,6 @@ RSpec.describe CategoriesController, :type => :controller do
       new_attr = { :name => 'new name', :description => 'blank' }
 
       it_behaves_like 'updatable resource', :category, new_attr
-
     end
 
     context 'with invalid params' do
@@ -113,7 +112,6 @@ RSpec.describe CategoriesController, :type => :controller do
       end
 
       it_behaves_like 'a success response', :edit
-
     end
   end
 
@@ -121,6 +119,4 @@ RSpec.describe CategoriesController, :type => :controller do
     include_examples 'destroy resource', Category
   end
 end
-
-
 

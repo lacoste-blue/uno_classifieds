@@ -71,7 +71,7 @@ RSpec.describe ListingsController, :type => :controller do
     context 'with valid params' do
       it 'creates a new Listing' do
         expect do
-          post :create, :params => {:listing => valid_attributes}, :session => valid_session
+          post :create, :params => { :listing => valid_attributes }, :session => valid_session
         end.to change(Listing, :count).by(1)
       end
 
@@ -92,7 +92,7 @@ RSpec.describe ListingsController, :type => :controller do
   describe 'PUT #update' do
     context 'with valid params' do
       let(:new_attributes) do
-        {:title => 'new title'}
+        { :title => 'new title' }
       end
 
       it 'updates the requested listing' do

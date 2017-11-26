@@ -10,7 +10,6 @@ RSpec.shared_examples 'a protected resource' do
   end
 end
 
-
 RSpec.shared_examples 'indexes resource' do |resource, resource_class|
   it "should return all #{resource}" do
     expect(assigns(resource)).to match(resource_class.all)
@@ -39,7 +38,7 @@ end
 RSpec.shared_examples 'updatable resource' do |resource_type, new_attr|
   before do
     @resource = resource_from_controller(subject)
-    @new_params = {:id => @resource.id, resource_type => new_attr}
+    @new_params = { :id => @resource.id, resource_type => new_attr }
   end
 
   it 'updates the resource' do

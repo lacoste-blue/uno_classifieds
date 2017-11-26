@@ -40,10 +40,10 @@ group :development, :test do
   gem 'byebug', :platform => :mri
   gem 'database_cleaner'
   gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 3.6'
-  gem 'simplecov'
   gem 'rspec-core'
+  gem 'rspec-rails', '~> 3.6'
   gem 'rspec_yah_formatter'
+  gem 'simplecov'
 end
 
 group :test do
