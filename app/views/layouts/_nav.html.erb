@@ -11,8 +11,8 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
 
     <% logger.debug "In nav view - current_name: #{controller_name}" %>
-    <% logger.debug "In nav view - action_name: #{action_name} and #{action_name == :new}" %>
-      <% if user_signed_in? && action_name != :new || %>
+    <% logger.debug "In nav view - action_name: #{action_name}" %>
+      <% if user_signed_in? && (action_name != 'new') %>
         <ul class="nav-item">
           <%= form_tag listings_path, method: :get, :class => 'form-inline my-2 my-lg-0 mr-lg-2' do |_| %>
               <div class="input-group">
@@ -35,7 +35,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <%= link_to('View All', listings_path, class: 'dropdown-item') %>
                 <%= link_to('Create New', new_listing_path, class: 'dropdown-item') %>
-                <%= link_to('My listings', listings_path(user_id: current_user.id), class:'dropdown-item') %>
+                <%= link_to('My listings', listings_list_path(user_id: current_user.id), class:'dropdown-item') %>
               </div>
             </li>
 
