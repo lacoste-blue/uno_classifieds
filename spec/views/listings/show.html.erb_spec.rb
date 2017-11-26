@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'listings/show', :type => :view do
   before(:each) do
+    allow(view).to receive(:can?).and_return(true)
     @listing = FactoryBot.create(:listing)
   end
 

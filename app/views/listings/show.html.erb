@@ -31,8 +31,10 @@
         </div>
 
         <div class="col-md-4">
-          <h2 class="my-3">Item Description</h2>
-           <%= @listing.description %>
+          <h2 class="my-3"><b>Item Description</b></h2>
+           <h4> <%= @listing.description %> </h4>
+           <br>
+           <br>
            <br>
            <br>
           <div class="category"> <h2>Category: <%= @listing.category.name %> </h2></div>
@@ -40,12 +42,26 @@
 			    <div class="price"> <h2> Price: <%= humanized_money_with_symbol @listing.price %></h2></div>
 			    <br>
 
-		      <button id="myBtn" type="button" class="btn btn-primary btn-lg">Contact Seller</button>
-          <button id="myBtn2" type="button" class="btn btn-primary btn-lg">View Location</button>
-        </div>
+            <div class="col-md-10" style="padding-left: 0px">
+              <div class="btn-toolbar" style="padding-right: 5px">
+               <button id="myBtn" type="button" class="btn btn-primary btn-lg">Contact Seller</button>
+                <button id="myBtn2" type="button" class="btn btn-primary btn-lg">View Location</button>
+              </div>
+            </div>
+          <% if can? :update, @listing %>
+            <div class="col-md-10" style="padding-top: 5px; padding-left: 0px">
+              <div class="btn-toolbar" style="padding-right: 5px">
 
-      </div>
-      <!-- /.row -->
+                  <%= link_to 'Edit', edit_listing_path(@listing), class: 'btn btn-primary btn-lg' %>
+                <%= link_to 'Delete', @listing, :method => :delete, class: 'btn btn-primary btn-lg',
+                                data: { confirm: "Delete listing:  #{@listing.title}?"} %>
+            </div>
+            </div>
+              <% end %>
+
+        </div> <!-- col-md-4 -->
+
+      </div> <!-- /.row -->
       <div id="myModal" class="modal">
 
         <!-- Modal content -->

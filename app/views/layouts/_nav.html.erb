@@ -12,10 +12,9 @@
 
     <% logger.debug "In nav view - current_name: #{controller_name}" %>
     <% logger.debug "In nav view - action_name: #{action_name}" %>
-    <% if controller_name != 'registrations' && (controller_name != 'listings' || action_name != 'show') %>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && (action_name != 'new') %>
         <ul class="nav-item">
-          <%= form_for listings_path, method: :get, :html => {:class => 'form-inline my-2 my-lg-0 mr-lg-2'} do |_| %>
+          <%= form_tag listings_path, method: :get, :class => 'form-inline my-2 my-lg-0 mr-lg-2' do |_| %>
               <div class="input-group">
 
               <%= text_field_tag :search, params[:search], class: 'form-control search-bar' %>
@@ -25,7 +24,6 @@
               </div>
           <% end %>
         </ul>
-      <% end %>
     <% end %>
 
       <ul class="navbar-nav ml-auto">
@@ -37,7 +35,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <%= link_to('View All', listings_path, class: 'dropdown-item') %>
                 <%= link_to('Create New', new_listing_path, class: 'dropdown-item') %>
-                <%= link_to('My listings', listings_path(user_id: current_user.id), class:'dropdown-item') %>
+                <%= link_to('My listings', listings_list_path(user_id: current_user.id), class:'dropdown-item') %>
               </div>
             </li>
 
