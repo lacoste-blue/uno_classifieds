@@ -17,9 +17,11 @@
     <div class="col-lg-3">
 
       <h1 class="my-4">Categories</h1>
-      <div class="list-group">
+      <div>
         <% @categories.each do |category| %>
-            <%= link_to category.name.titleize, listings_path(category_id: category.id), class: 'list-group-item' %>
+            <h4 class=" h4-margin">
+            <%= link_to category.name.titleize, listings_path(category_id: category.id), class: 'list-group-item role="tablist"' %>
+            </h4>
         <% end %>
       </div>
 
