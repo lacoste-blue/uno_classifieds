@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-color fixed-top">
   <div class="container">
-    <div class="navbar-brand">
+    <div class="navbar-brand nav-bar">
       <%= link_to image_tag('uno_logo.png', size: '40x40', class: 'd-inline-block align-top'), root_path, :class => 'a-blank' %>
       &nbsp;<%= link_to 'UNO CLASSIFIEDS', root_path, class: 'brand-text' %>
     </div>
@@ -25,8 +25,82 @@
           <% end %>
         </ul>
     <% end %>
+      <div id="advanceSearch" class="modal">
 
-      <ul class="navbar-nav ml-auto">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1>Please Select all the Field Below:</h1>
+            <span class="ui-icon-circle-close close-search">x</span>
+            <h2></h2>
+          </div>
+          <div class="new_listing advance-search-height">
+            <div>
+              <form>
+                <div class="form-group col-xs-12">
+                  <label for="sel1">Category</label>
+                  <select class="form-control" id="sel1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                  <br>
+                  <label for="sel2">Tags</label>
+                  <select class="form-control" id="sel1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                  <br>
+                  <label for="sel3">Name</label>
+                  <input type="text" class="form-control" placeholder="Last name">
+                  <br>
+                  <label for="sel4">Others</label>
+                  <input type="text" class="form-control" placeholder="Last name">
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn btn-primary" data-dismiss="modal">Search</button>
+            <h3></h3>
+          </div>
+
+          <script>
+              // Get the modal
+              var modal = document.getElementById('advanceSearch');
+
+              // Get the button that opens the modal
+              var search = document.getElementById("searchBtn");
+
+              // Get the <span> element that closes the modal
+              var span = document.getElementsByClassName("ui-icon-circle-close")[0];
+
+              // When the user clicks the button, open the modal
+              search.onclick = function() {
+                  modal.style.display = "block";
+              };
+
+              // When the user clicks on <span> (x), close the modal
+              span.onclick = function() {
+                  modal.style.display = "none";
+              };
+
+              // When the user clicks anywhere outside of the modal, close it
+              window.onclick = function(event) {
+                  if (event.target == modal) {
+                      modal.style.display = "none";
+                  }
+              }
+          </script>
+        </div>
+
+      </div>
+
+
+      <ul class="navbar-nav ml-auto nav-align">
         <% if current_user %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
