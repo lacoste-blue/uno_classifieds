@@ -90,7 +90,7 @@
 }
 
 .advance-search-space {
-  margin-left: 20%;
+  margin-left: inherit;
 }
 
 .advance-search-height{
@@ -105,9 +105,19 @@
 
 .nav-align {
   margin-top: -8px;
+  margin-left: 40px;
+}
+
+.nav-collapse-align{
+  padding-left: unset;
+  padding-right: unset;
 }
 
 .nav-bar{
   line-height: 38px !important;
+}
+
+.close-align{
+  margin-left: auto;
 }
 
