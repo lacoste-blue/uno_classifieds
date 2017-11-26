@@ -42,11 +42,13 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
+  gem 'rspec-core'
+  gem 'rspec_yah_formatter'
 end
 
 group :test do
-  gem 'rspec-core'
-  gem 'rspec_html_formatter', '~> 0.3.1'
+  # gem 'rspec-core'
+  #   gem 'rspec_html_formatter', '~> 0.3.1'
 end
 
 group :development do
