@@ -44,6 +44,7 @@ class ListingsController < ApplicationController
   # PATCH/PUT /listings/1.json
   def update
     if @listing.update(listing_params)
+      @listing.__elasticsearch__.index_document
       if params[:images] && create_images
         flash[:notice] = 'Listing was successfully updated.'
       end
@@ -99,4 +100,3 @@ class ListingsController < ApplicationController
     params.permit(:category_id, :user_id, :tag, :search)
   end
 end
-
