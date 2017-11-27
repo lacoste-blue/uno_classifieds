@@ -28,13 +28,13 @@ RSpec.describe PicturesController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # Picture. As you add validations to Picture, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip('Add a hash of attributes valid for your model')
-  }
+  let(:valid_attributes) do
+    { :listing_id => FactoryBot.create(:listing).id }
+  end
 
-  let(:invalid_attributes) {
-    skip('Add a hash of attributes invalid for your model')
-  }
+  let(:invalid_attributes) do
+    {}
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -50,7 +50,7 @@ RSpec.describe PicturesController, :type => :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
-      picture = Picture.create! valid_attributes
+      picture = FactoryBot.create(:picture)
       get :show, :params => { :id => picture.to_param }, :session => valid_session
       expect(response).to be_success
     end
@@ -58,15 +58,15 @@ RSpec.describe PicturesController, :type => :controller do
 
   describe 'GET #new' do
     it 'returns a success response' do
-      skip('Need to fix this')
-      get :new, :params => {}, :session => valid_session
+      listing = FactoryBot.create(:listing)
+      get :new, :params => { :listing_id => listing.id }, :session => valid_session
       expect(response).to be_success
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      picture = Picture.create! valid_attributes
+      picture = FactoryBot.create(:picture)
       get :edit, :params => { :id => picture.to_param }, :session => valid_session
       expect(response).to be_success
     end
@@ -76,7 +76,8 @@ RSpec.describe PicturesController, :type => :controller do
     context 'with valid params' do
       it 'creates a new Picture' do
         expect {
-          post :create, :params => { :picture => valid_attributes }, :session => valid_session
+          p = FactoryBot.create(:picture)
+          post :create, :params => { :picture => p.attributes }, :session => valid_session
         }.to change(Picture, :count).by(1)
       end
 
@@ -87,54 +88,30 @@ RSpec.describe PicturesController, :type => :controller do
     end
 
     context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, :params => { :picture => invalid_attributes }, :session => valid_session
-        expect(response).to be_success
-      end
-    end
-  end
-
-  describe 'PUT #update' do
-    context 'with valid params' do
-      let(:new_attributes) {
-        skip('Add a hash of attributes valid for your model')
-      }
-
-      it 'updates the requested picture' do
-        picture = Picture.create! valid_attributes
-        put :update, :params => { :id => picture.to_param, :picture => new_attributes }, :session => valid_session
-        picture.reload
-        skip('Add assertions for updated state')
+      it 'does not create picture' do
+        post :create, :params => { :picture => { :listing_id => 0 } }, :session => valid_session
+        expect(response.status).to eq 302
       end
 
-      it 'redirects to the picture' do
-        picture = Picture.create! valid_attributes
-        put :update, :params => { :id => picture.to_param, :picture => valid_attributes }, :session => valid_session
-        expect(response).to redirect_to(picture)
-      end
-    end
-
-    context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        picture = Picture.create! valid_attributes
-        put :update, :params => { :id => picture.to_param, :picture => invalid_attributes }, :session => valid_session
-        expect(response).to be_success
+      it 'redirects to listings' do
+        post :create, :params => { :picture => { :listing_id => 0 } }, :session => valid_session
+        expect(response).to redirect_to(pictures_path)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested picture' do
-      picture = Picture.create! valid_attributes
+      picture = FactoryBot.create(:picture)
       expect {
         delete :destroy, :params => { :id => picture.to_param }, :session => valid_session
       }.to change(Picture, :count).by(-1)
     end
 
-    it 'redirects to the pictures list' do
-      picture = Picture.create! valid_attributes
+    it 'redirects to the listings index' do
+      picture = FactoryBot.create(:picture)
       delete :destroy, :params => { :id => picture.to_param }, :session => valid_session
-      expect(response).to redirect_to(pictures_url)
+      expect(response).to redirect_to(listing_url(picture.listing_id))
     end
   end
 end
