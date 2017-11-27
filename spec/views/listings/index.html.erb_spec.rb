@@ -26,3 +26,4 @@ RSpec.describe 'listings/index', :type => :view do
     # assert_select 'tr>td', :text => 2.5.to_s, :count => 2
   end
 end
+

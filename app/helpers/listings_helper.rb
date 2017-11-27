@@ -26,7 +26,7 @@ module ListingsHelper
   end
 
   def self.search(_, _, param)
-    %( with description like #{param.values.first} )
+    %( with text like #{param.values.first} )
   end
 
   def make_link(string = nil, param = {})

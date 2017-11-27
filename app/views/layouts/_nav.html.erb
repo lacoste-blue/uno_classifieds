@@ -24,7 +24,7 @@
               </div>
           <% end %>
             <div class="input-group advance-search-space">
-        <button id="searchBtn" type="button" class="btn btn-primary btn-lg advance-search">Advance Search</button>
+        <button id="searchBtn" type="button" class="btn btn-primary btn-lg advance-search">Advanced Search</button>
         </div>
         </ul>
     <% end %>
@@ -33,44 +33,36 @@
         <!-- Modal content -->
         <div class="modal-content">
           <div class="modal-header">
-            <h1>Please Select all the Field Below:</h1>
+            <h1>Search by one or more fields below:</h1>
             <span class="ui-icon-circle-close close-search">x</span>
             <h2></h2>
           </div>
           <div class="new_listing advance-search-height">
             <div>
-              <form>
-                <div class="form-group col-xs-12">
-                  <label for="sel1">Category</label>
-                  <select class="form-control" id="sel1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
+              <%= form_tag listings_path,  method: 'get', :class => "form-group col-xs-12", :id => 'adv_search' do |_| %>
+                  <label for="category_id" style="padding-top: 10px">Category</label>
+                  <%= select_tag(:category_id, options_from_collection_for_select(Category.all, :id, :name), {:prompt => '', class: 'form-control'}) %>
                   <br>
-                  <label for="sel2">Tags</label>
-                  <select class="form-control" id="sel1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
+                  <label for="tag">Tag</label>
+                  <%= text_field_tag :tag, params[:tag], class: 'form-control', placeholder: 'Search by tag' %>
                   <br>
-                  <label for="sel3">Name</label>
-                  <input type="text" class="form-control" placeholder="Last name">
+                  <label for="user_id">User</label>
+                  <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :name, :prompt => true), {:prompt => '', class: 'form-control'}) %>
                   <br>
-                  <label for="sel4">Others</label>
-                  <input type="text" class="form-control" placeholder="Last name">
-                </div>
-              </form>
+                  <label for="search">Text search</label>
+                  <%= text_field_tag :search, params[:search], :class => 'form-control', placeholder: 'Search by text'%>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn btn-primary" data-dismiss="modal">Search</button>
+            <% puts params %>
+            <% puts '------------------------------------------------------------------' %>
+            <%= button_tag type: 'submit' , class: 'btn btn-primary btn-lg', form: 'adv_search'  do %>
+            Search
+                <% end %>
             <h3></h3>
-          </div>
 
+          </div>
+              <% end %>
           <script>
               // Get the modal
               var searchBar = document.getElementById('advanceSearch');

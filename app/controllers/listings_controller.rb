@@ -7,7 +7,6 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    ###
     @listings = Listing.where(nil)
     logger.debug "In listing controller index - at top - params: #{params}"
     redirect_params(params).each do |key, value|
@@ -100,3 +99,4 @@ class ListingsController < ApplicationController
     params.permit(:category_id, :user_id, :tag, :search)
   end
 end
+
