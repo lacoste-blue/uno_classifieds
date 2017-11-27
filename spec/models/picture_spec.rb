@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Picture, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'should create with valid attributes' do
+    expect(Picture.new).to be_valid
+  end
 end
 

@@ -50,7 +50,15 @@ RSpec.describe Listing, :type => :model do
   end
 
   describe 'has_picture' do
-    it 'returns listings if picture.exists?'
+    before { FactoryBot.create(:listing) }
+    it 'returns empty when no pictures' do
+      expect(Listing.has_picture).to be_empty
+    end
+
+    it 'returns all listings with images' do
+      2.times { FactoryBot.create(:picture) }
+      expect(Listing.has_picture.count).to eq(2)
+    end
   end
 
   describe '.all_tags=' do
