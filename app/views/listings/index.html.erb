@@ -17,6 +17,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Category</th>
       <th>Seller</th>
       <th>Location</th>
       <th>Description</th>
@@ -30,6 +31,7 @@
     <% @listings.each do |listing| %>
       <tr>
         <td><%= link_to listing.title, listing %></td>
+        <td><%= link_to listing.category.name, listings_path(category_id: listing.category_id) %></td>
         <td><%= link_to listing.user.name, listings_path(user_id: listing.user_id) %></td>
         <td><%= listing.location %></td>
         <td><%= listing.description %></td>
