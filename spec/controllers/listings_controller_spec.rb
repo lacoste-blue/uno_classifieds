@@ -50,6 +50,14 @@ RSpec.describe ListingsController, :type => :controller do
     before { get :index }
     it_behaves_like 'a success response', :index
     include_examples 'indexes resource', :listings, Listing
+
+    it 'filters by param' do
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:listing)
+      FactoryBot.create(:listing, :user => user)
+      get :index, :params => { :user_id => user.id }
+      expect(controller.params[:user_id]).to eq(user.id.to_s)
+    end
   end
 
   describe 'GET #show' do
@@ -120,6 +128,29 @@ RSpec.describe ListingsController, :type => :controller do
 
   describe 'DELETE #destroy' do
     include_examples 'destroy resource', Listing
+  end
+
+  describe 'GET #grid' do
+    it 'redirects to listings' do
+      get :grid
+      expect(response).to redirect_to(listings_url)
+    end
+
+    it 'sets current_user to grid view' do
+      expect(subject.current_user.listing_view_type).to eq('grid')
+    end
+  end
+
+  describe 'GET #list' do
+    it 'redirects to listings' do
+      get :list
+      expect(response).to redirect_to(listings_url)
+    end
+
+    it 'sets current_user to list view' do
+      get :list
+      expect(subject.current_user.listing_view_type).to eq('list')
+    end
   end
 end
 
