@@ -11,5 +11,10 @@ class Picture < ApplicationRecord
                     }
 
   validates_attachment_content_type :image, :content_type => %w[image/jpg image/jpeg image/png]
+
+  def self.no_image
+    # @no_img = Picture.new(:image => ActionDispatch::Http::UploadedFile.new(:tempfile => File.new(Rails.root.join('app', 'assets', 'images', 'no-image.jpg'))))
+    @no_img ||= Picture.create(:image => File.open(Rails.root.join('app', 'assets', 'images', 'no-image.jpg')))
+  end
 end
 

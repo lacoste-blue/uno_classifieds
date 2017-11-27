@@ -27,6 +27,8 @@
         <div class="col-md-8">
           <% if @listing.pictures.first %>
            <%= image_tag @listing.pictures.first.image.url(:big), :class => 'img-fluid' %>
+              <% else %>
+          <%= image_tag 'no-image.jpg' %>
           <% end %>
         </div>
 

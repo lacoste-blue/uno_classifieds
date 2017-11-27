@@ -1,11 +1,17 @@
 <div class="col-lg-4 col-md-6 mb-4">
   <div class="card h-100">
     <% if listing.pictures.first %>
-      <center style="padding-top: 5px;">
-        <%= link_to image_tag(listing.pictures.first.image.url(:thumb)),
-                    listing_path(listing), target: '_blank', :class => 'thumbnail'  %>
+        <% imgtag = image_tag(listing.pictures.first.image.url(:thumb)) %>
+        <% else %>
+        <% imgtag = image_tag(Picture.no_image.image.url(:thumb)) %>
+        <% end %>
+
+      <center style='padding-top: 5px;'>
+        <%= link_to imgtag, listing_path(listing), target: '_blank', :class => 'thumbnail'  %>
       </center>
-      <% end %>
+    <!--% else %>-->
+        <!--%= link_to image_tag(Picture.last.image.url(:thumb)), listings_path(controller.send(:redirect_params,params)), :class => 'thumbnail', :style => 'width: 100%; height: auto;' %>-->
+    <!--% end %>-->
     <div class="card-body">
       <h4 class="card-title">
         <%= link_to listing.title, listing %>
