@@ -48,9 +48,7 @@ bundle install
 } || {
   docker kill $(cat .es_container_id)
   exit 1
-}
-
-docker kill $(cat .es_container_id)'''
+}'''
               script {
                 publishHTML(target: [
                   allowMissing: false,
