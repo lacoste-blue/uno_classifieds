@@ -8,8 +8,11 @@ pipeline {
   stages {
     stage('Prep') {
       steps {
-        sh '''gem install bundler
-bundle install'''
+        sh '''
+gem install bundler
+bundle install
+gem install mutant-rspec
+'''
       }
     }
     stage('Verify') {
@@ -99,6 +102,21 @@ docker kill $(cat .es_container_id)'''
               
             }
           }
+        }
+      }
+      stage('Mutate') {
+        steps {
+          sh '''
+{
+  docker run -dt -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.0.0 > .es_container_id
+  sleep 30;
+  RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
+} || {
+  docker kill $(cat .es_container_id)
+  exit 1
+}
+
+'''
         }
       }
     }
