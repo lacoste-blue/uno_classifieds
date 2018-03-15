@@ -113,14 +113,11 @@ docker kill $(cat .es_container_id)
   RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
 } || {
   docker kill $(cat .es_container_id)
-  exit 1
 }
 docker kill $(cat .es_container_id)
 
 '''
           script {
-            
-            
             publishHTML(target: [
               allowMissing: false,
               alwaysLinkToLastBuild: false,
@@ -130,8 +127,6 @@ docker kill $(cat .es_container_id)
               reportTitles: "Mutation Report",
               reportName: "Mutation Report"
             ])
-            
-            
           }
           
         }
