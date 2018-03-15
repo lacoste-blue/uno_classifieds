@@ -118,6 +118,22 @@ docker kill $(cat .es_container_id)
 docker kill $(cat .es_container_id)
 
 '''
+          script {
+            
+            
+            publishHTML(target: [
+              allowMissing: false,
+              alwaysLinkToLastBuild: false,
+              keepAll: true,
+              reportDir: 'coverage',
+              reportFiles: 'index.html',
+              reportTitles: "Mutation Report",
+              reportName: "Mutation Report"
+            ])
+            
+            
+          }
+          
         }
       }
     }
