@@ -112,9 +112,9 @@ docker kill $(cat .es_container_id)
   sleep 30;
   RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
 } || {
-  docker kill $(cat .es_container_id)
+  docker kill $(cat .es_container_id) || 0
 }
-docker kill $(cat .es_container_id)
+docker kill $(cat .es_container_id) || 0
 
 '''
           script {
