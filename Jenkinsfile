@@ -12,6 +12,11 @@ pipeline {
 bundle install
 
 '''
+        catchError() {
+          sh 'docker kill $(docker ps -q)'
+          sh 'ls -la'
+        }
+        
       }
     }
     stage('Verify') {
@@ -102,13 +107,18 @@ bundle install
     }
     stage('Mutate') {
       steps {
-        sh '''
+        catchError() {
+          sh '''
 RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
 
 
-docker kill $(docker ps -q)
-
 '''
+        }
+        
+        catchError() {
+          sh 'docker kill $(docker ps -q)'
+        }
+        
         script {
           publishHTML(target: [
             allowMissing: false,
