@@ -45,6 +45,7 @@ group :development, :test do
   gem 'rspec_yah_formatter'
   gem 'simplecov'
   gem 'mutant-rspec'
+  gem 'mutest-rspec'
 end
 
 group :test do
