@@ -135,7 +135,7 @@ RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
         stage('Mutest') {
           steps {
             catchError() {
-              sh 'mutest --include lib --require ./config/environment --use rspec \'UnoClassifieds*\''
+              sh 'mutest --include lib --require ./config/environment --use rspec User'
             }
             
           }
