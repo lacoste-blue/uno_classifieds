@@ -9,6 +9,7 @@ pipeline {
     stage('Prep') {
       steps {
         sh '''gem install bundler
+gem install mutest-rspec
 bundle install
 
 '''
@@ -105,32 +106,45 @@ bundle install
         }
       }
     }
-    stage('Mutate') {
-      steps {
-        catchError() {
-          sh '''
+    stage('Mutations') {
+      parallel {
+        stage('Mutate') {
+          steps {
+            catchError() {
+              sh '''
 RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
 
 
 '''
+            }
+            
+            script {
+              publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'coverage',
+                reportFiles: 'index.html',
+                reportTitles: "Mutation Report",
+                reportName: "Mutation Report"
+              ])
+            }
+            
+          }
         }
-        
-        catchError() {
-          sh 'docker kill $(docker ps -q)'
+        stage('Mutest') {
+          steps {
+            catchError() {
+              sh 'mutest'
+            }
+            
+          }
         }
-        
-        script {
-          publishHTML(target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: 'coverage',
-            reportFiles: 'index.html',
-            reportTitles: "Mutation Report",
-            reportName: "Mutation Report"
-          ])
-        }
-        
+      }
+    }
+    stage('Kill') {
+      steps {
+        sh 'docker kill $(docker ps -q)'
       }
     }
   }
