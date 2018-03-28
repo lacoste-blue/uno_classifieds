@@ -9,7 +9,6 @@ pipeline {
     stage('Prep') {
       steps {
         sh '''gem install bundler
-gem install mutest-rspec
 bundle install
 
 '''
@@ -135,7 +134,7 @@ RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
         stage('Mutest') {
           steps {
             catchError() {
-              sh 'mutest --include lib --require ./config/environment --use rspec User'
+              sh 'RAILS_ENV=test bundle exec mutest --include lib --require ./config/environment --use rspec User'
             }
             
           }
