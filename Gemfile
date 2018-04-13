@@ -78,5 +78,6 @@ gem 'pg'
 gem 'rubocop'
 gem 'rubycritic'
 gem 'seed_dump'
+gem 'simplecov-json'
 gem 'tzinfo-data', :platforms => %i[mingw mswin x64_mingw jruby]
 
