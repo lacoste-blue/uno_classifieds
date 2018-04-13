@@ -105,7 +105,7 @@ bundle exec rubycritic --no-browser'''
               ])
             }
             
-            archiveArtifacts 'tmp/rubycritic/rubycritic.json'
+            archiveArtifacts 'tmp/rubycritic/report.json'
           }
         }
       }
