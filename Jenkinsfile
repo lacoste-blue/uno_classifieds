@@ -23,7 +23,8 @@ bundle install
       parallel {
         stage('Lint') {
           steps {
-            sh 'bundle exec rubocop --format html -o rubocop.html || true'
+            sh '''bundle exec rubocop --format html -o rubocop.html || true
+bundle exec rubocop --format json -o rubocop.json || true'''
             script {
               publishHTML(target: [
                 allowMissing: false,
@@ -36,6 +37,7 @@ bundle install
               ])
             }
             
+            archiveArtifacts 'rubocop.json'
           }
         }
         stage('Syntax') {
@@ -84,11 +86,13 @@ bundle install
               ])
             }
             
+            archiveArtifacts 'coverage/coverage.json'
           }
         }
         stage('Quality') {
           steps {
-            sh 'bundle exec rubycritic --no-browser'
+            sh '''bundle exec rubycritic --no-browser --format json --path rubycritic.json
+bundle exec rubycritic --no-browser'''
             script {
               publishHTML(target: [
                 allowMissing: false,
@@ -101,6 +105,7 @@ bundle install
               ])
             }
             
+            archiveArtifacts 'rubycritic.json'
           }
         }
       }
