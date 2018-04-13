@@ -91,7 +91,7 @@ bundle exec rubocop --format json -o rubocop.json || true'''
         }
         stage('Quality') {
           steps {
-            sh '''bundle exec rubycritic --no-browser --format json --path rubycritic.json
+            sh '''bundle exec rubycritic --no-browser --format json
 bundle exec rubycritic --no-browser'''
             script {
               publishHTML(target: [
@@ -105,7 +105,7 @@ bundle exec rubycritic --no-browser'''
               ])
             }
             
-            archiveArtifacts 'rubycritic.json'
+            archiveArtifacts 'tmp/rubycritic/rubycritic.json'
           }
         }
       }
