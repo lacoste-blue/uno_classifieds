@@ -16,7 +16,7 @@
 require 'simplecov'
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
-  SimpleCov::Formatter::CSVFormatter,
+  SimpleCov::Formatter::JSONFormatter,
 ])
 SimpleCov.start
 RSpec.configure do |config|
