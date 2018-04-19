@@ -151,5 +151,13 @@ RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
         sh 'docker kill $(docker ps -q)'
       }
     }
+    stage('Upload') {
+      steps {
+        script {
+          s3Upload acl: 'Private', bucket: 'mutation-analysis', cacheControl: '', excludePathPattern: '', file: 'rubocop.json', includePathPattern: '', metadatas: [''], path: 'uno_classifieds/${BUILD_NUMBER}/', workingDir: ''
+        }
+        
+      }
+    }
   }
 }
