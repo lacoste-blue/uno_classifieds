@@ -154,7 +154,7 @@ RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
     stage('Upload') {
       steps {
         script {
-          s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'rubocop.json', path: 'uno_classifieds/${BUILD_NUMBER}/'
+          s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'rubocop.json', path: 'uno_classifieds/$BUILD_NUMBER/'
         }
         
       }
