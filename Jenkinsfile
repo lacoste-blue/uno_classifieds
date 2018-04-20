@@ -110,40 +110,28 @@ bundle exec rubycritic --no-browser'''
         }
       }
     }
-    stage('Mutations') {
-      parallel {
-        stage('Mutate') {
-          steps {
-            catchError() {
-              sh '''
-RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
+    stage('Mutate') {
+      steps {
+        catchError() {
+          sh '''
+RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User > mutate.out
 
 
 '''
-            }
-            
-            script {
-              publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: 'coverage',
-                reportFiles: 'index.html',
-                reportTitles: "Mutation Report",
-                reportName: "Mutation Report"
-              ])
-            }
-            
-          }
         }
-        stage('Mutest') {
-          steps {
-            catchError() {
-              sh 'RAILS_ENV=test bundle exec mutest --include lib --require ./config/environment --use rspec User'
-            }
-            
-          }
+        
+        script {
+          publishHTML(target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: 'coverage',
+            reportFiles: 'index.html',
+            reportTitles: "Mutation Report",
+            reportName: "Mutation Report"
+          ])
         }
+        
       }
     }
     stage('Kill') {
@@ -159,6 +147,8 @@ RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User
           s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'coverage.json', path: "uno_classifieds/${env.BUILD_NUMBER}/", workingDir: "coverage"
           
           s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'report.json', path: "uno_classifieds/${env.BUILD_NUMBER}/", workingDir: "tmp/rubycritic"
+          
+          s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'mutate.out', path: "uno_classifieds/${env.BUILD_NUMBER}/"
         }
         
       }
