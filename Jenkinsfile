@@ -84,6 +84,8 @@ bundle exec rubocop --format json -o rubocop.json || true'''
                 reportTitles: "New Unit Test Report",
                 reportName: "New Unit Test Report"
               ])
+              
+              s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'coverage.json', path: "uno_classifieds/${env.BUILD_NUMBER}/", workingDir: "coverage"
             }
             
             archiveArtifacts 'coverage/coverage.json'
@@ -144,7 +146,7 @@ RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec User > mut
         script {
           s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'rubocop.json', path: "uno_classifieds/${env.BUILD_NUMBER}/"
           
-          s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'coverage.json', path: "uno_classifieds/${env.BUILD_NUMBER}/", workingDir: "coverage"
+          s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'coverage.json', path: "uno_classifieds/${env.BUILD_NUMBER}/mutate_coverage.json", workingDir: "coverage"
           
           s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'report.json', path: "uno_classifieds/${env.BUILD_NUMBER}/", workingDir: "tmp/rubycritic"
           
