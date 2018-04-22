@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
+  gem 'mutant-rspec'
 end
 
 group :development do
@@ -59,3 +60,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'money-rails'
 gem 'paperclip'
+gem 'simplecov-json'
+gem 'rubocop'
+gem 'rubycritic'
