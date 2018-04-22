@@ -42,7 +42,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
   gem 'mutant-rspec'
-  gem 'rspec_yah_formatter'
 end
 
 group :development do
@@ -64,3 +63,4 @@ gem 'paperclip'
 gem 'simplecov-json'
 gem 'rubocop'
 gem 'rubycritic'
+gem 'rspec_yah_formatter'
