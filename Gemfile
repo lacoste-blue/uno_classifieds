@@ -41,6 +41,12 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
+  gem 'rspec_yah_formatter'
+  gem 'mutant-rspec'
+  gem 'mutest-rspec'
+  gem 'simplecov-json'
+  gem 'rubocop'
+  gem 'rubycritic'
 end
 
 group :development do
