@@ -76,15 +76,6 @@ RAILS_ENV=test bundle exec rake db:migrate
                 reportName: "Coverage Report"
               ])
               
-              publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: 'rspec_html_reports',
-                reportFiles: 'overview.html',
-                reportTitles: "New Unit Test Report",
-                reportName: "New Unit Test Report"
-              ])
               
               s3Upload acl: 'Private', bucket: 'mutation-analysis', file: 'coverage.json', path: "uno_classifieds/master/${env.BUILD_NUMBER}/", workingDir: "coverage"
             }
